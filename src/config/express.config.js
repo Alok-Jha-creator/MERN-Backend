@@ -2,6 +2,16 @@ const express =require("express")
 const app =express()
 
 
+
+
+
+app.use(express.json()) // for parsing application/json
+
+app.get('/',(req,res,next)=>{
+    res.json({sucess:true,message:"hello world",status:200})
+});
+
+
 app.get('/',(req,res,next)=>{
     const data={        name:"express",
         slider:[
