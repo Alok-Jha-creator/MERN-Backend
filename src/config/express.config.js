@@ -1,4 +1,5 @@
 const express =require("express")
+const authRouter = require("../modules/auth/auth.route")
 const app =express()
 
 
@@ -24,35 +25,6 @@ app.get('/about-us',(req,res,next)=>{
 res.json({sucess:true,data:data,message:"data fetched successfully",status:200})
 });
 
-/** Auth Routes Start**/
- app.post("/register",(req,res,next)=>{
-    //logic
-    res.json({
-        data:{},
-        message:"user registered successfully",
-        status:"OK"
-    })
-})
 
-app.get('/activate/123',(req,res,next)=>{
-     //logic
-     res.json({
-        data:{},
-        message:"user Activated successfully",
-        status:"OK"
-    })
-
-})
-
-app.post("/login",(req,res,next)=>{
-    //logic
-    res.json({
-        data:{},
-        message:"user logged in successfully",
-        status:"OK"
-    })
-})
- 
-/** Auth Routes End */
 
 module.exports=app;
