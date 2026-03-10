@@ -3,9 +3,6 @@ const authRouter = require("../modules/auth/auth.route")
 const app =express()
 
 
-
-
-
 app.use(express.json()) // for parsing application/json
 
 app.get('/',(req,res,next)=>{
