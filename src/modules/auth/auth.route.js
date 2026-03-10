@@ -13,7 +13,7 @@ authRouter.post("/register",(req,res,next)=>{
     })
 })
 
-authRouter.get('/activate/123',(req,res,next)=>{
+authRouter.get("/activate/:token",(req,res,next)=>{
      //logic
      res.json({
         data:{},
