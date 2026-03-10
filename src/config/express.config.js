@@ -8,7 +8,7 @@ app.use(express.json()) // for parsing application/json
 app.get('/',(req,res,next)=>{
     res.json({sucess:true,message:"hello world",status:200})
 });
-
+app.use("/auth", authRouter)
 
 app.get('/about-us',(req,res,next)=>{
     const data={        name:"express",

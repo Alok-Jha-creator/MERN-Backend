@@ -8,7 +8,7 @@ const HOST="127.0.0.1"; // server Ip
 const PORT =9005;
 
 //host and port listening
-httpServer.listen(PORT,HOST,(err)=>{
+httpServer.listen(PORT, HOST,(err)=>{
     if(!err){
         console.log("server running in port,"+PORT+",host: ",HOST)
         console.log("press Ctrl + C to disconnet the server")
