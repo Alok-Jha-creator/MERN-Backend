@@ -22,6 +22,4 @@ app.get('/about-us',(req,res,next)=>{
 res.json({sucess:true,data:data,message:"data fetched successfully",status:200})
 });
 
-
-
 module.exports=app;

@@ -2,14 +2,10 @@
 const http= require("http");
 const app = require("./src/config/express.config") //importing express app from config file
 
-
-
-
 const httpServer =http.createServer(app);   //application handeler function
 
 const HOST="127.0.0.1"; // server Ip
 const PORT =9005;
-
 
 //host and port listening
 httpServer.listen(PORT,HOST,(err)=>{
