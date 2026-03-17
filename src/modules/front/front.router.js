@@ -2,7 +2,7 @@ const frontRouter = require('express').Router();
 
 
 frontRouter.get('/',(req,res,next)=>{
-    res.json({sucess:true,message:"hello world",status:200})
+    res.json({success:true,message:"hello world",status:200})
 });
 
 
@@ -15,7 +15,7 @@ frontRouter.get('/about-us',(req,res,next)=>{
         ],
     };
 
-res.json({sucess:true,data:data,message:"data fetched successfully",status:200})
+res.json({success:true,data:data,message:"data fetched successfully",status:200})
 });
 
 
