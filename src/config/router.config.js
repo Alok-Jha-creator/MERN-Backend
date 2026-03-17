@@ -11,7 +11,7 @@ const userRouter = require("../modules/user/user.router");
 
 
 router.use("/auth", authRouter);
-// router.use("/front", frontRouter);
+ router.use("/front", frontRouter);
 // router.use("/banner", bannerRouter);
 // router.use("/brand", brandRouter);
 // router.use("/category", categoryRouter);
