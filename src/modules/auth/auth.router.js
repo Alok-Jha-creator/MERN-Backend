@@ -1,37 +1,11 @@
 //const express = require('express');
 //const router = express.Router();
-
 const authRouter = require('express').Router();
+const authCtrl = require('./auth.controller');
 
-/** Auth Routes Start**/
-authRouter.post("/register",(req,res,next)=>{
-    //logic
-    res.json({
-        data:{},
-        message:"user registered successfully",
-        status:"OK"
-    })
-})
-
-authRouter.get("/activate/:token",(req,res,next)=>{
-     //logic
-     res.json({
-        data:{},
-        message:"user Activated successfully",
-        status:"OK"
-    })
-
-})
-
-authRouter.post("/login",(req,res,next)=>{
-    //logic
-    res.json({
-        data:{},
-        message:"user logged in successfully",
-        status:"OK"
-    })
-})
+authRouter.post("/register",authCtrl.registerUser)
+authRouter.get("/activate/:token",authCtrl.activateUserByToken)
+authRouter.post("/login",authCtrl.loginUser)
  
-/** Auth Routes End */
 
 module.exports=authRouter;
