@@ -4,6 +4,7 @@ const authCtrl = require('./auth.controller');
 authRouter.post("/register",authCtrl.registerUser)
 authRouter.get("/activate/:token",authCtrl.activateUserByToken)
 authRouter.post("/login",authCtrl.loginUser)
+
  
 
 module.exports=authRouter;
