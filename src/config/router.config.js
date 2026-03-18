@@ -10,7 +10,7 @@ const transactionRouter = require("../modules/transaction/transaction.router");
 const userRouter = require("../modules/user/user.router");
 
 
-
+/* Routes Start */
 router.use("/auth", authRouter);
 router.use("/front", frontRouter);
 // router.use("/banner", bannerRouter);
@@ -19,5 +19,5 @@ router.use("/front", frontRouter);
 // router.use("/products", productsRouter);
 // router.use("/transaction", transactionRouter);
 // router.use("/user", userRouter);
-
+/* Routes End */
 module.exports=router;
