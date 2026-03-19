@@ -1,6 +1,7 @@
 // middleware
-const loginCheck = (req, res, next) => {
-   //logic
+const loginCheck = () => {
+  const checkLogin =(req, res, next) => {
+     //logic
    //check if user is logged in or not
    console.log("Middleware 1")
    //manipulate req object
@@ -8,6 +9,8 @@ const loginCheck = (req, res, next) => {
    //next function scope
    // throw an error through error handler
    next();
+  }
+    return checkLogin;
 };
 
 module.exports = { loginCheck } ;
