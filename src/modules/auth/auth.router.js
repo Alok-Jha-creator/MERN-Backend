@@ -10,7 +10,7 @@ authRouter.post("/forgot-password",authCtrl.forgotPasswordRequest)
 
  
 
-authRouter.get('/me',loginCheck(),authCtrl.getLoggedInUserProfile)
+authRouter.get('/me',loginCheck(['admin']),authCtrl.getLoggedInUserProfile)
 authRouter.post('/:userId/edit-user',loginCheck(),authCtrl.updateSingleRowByfilter)
 /* auth route end */
 module.exports=authRouter;

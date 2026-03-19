@@ -1,6 +1,6 @@
 // middleware
-const loginCheck = () => {
-  const checkLogin =(req, res, next) => {
+const loginCheck = ( allowedRole= null) => {
+  return (req, res, next) => {
      //logic
    //check if user is logged in or not
    console.log("Middleware 1")
@@ -10,7 +10,7 @@ const loginCheck = () => {
    // throw an error through error handler
    next();
   }
-    return checkLogin;
+   // return checkLogin;
 };
 
 module.exports = { loginCheck } ;
