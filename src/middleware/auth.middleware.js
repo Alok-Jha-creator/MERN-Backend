@@ -9,3 +9,5 @@ const loginCheck = (req, res, next) => {
    // throw an error through error handler
    next();
 };
+
+module.exports = { loginCheck } ;

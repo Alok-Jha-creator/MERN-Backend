@@ -1,5 +1,6 @@
 const authRouter = require('express').Router();
 const authCtrl = require('./auth.controller');
+const { loginCheck } = require('../../middleware/auth.middleware.js');
 /* Auth route */
 authRouter.post("/register",authCtrl.registerUser)
 authRouter.get("/activate/:token",authCtrl.activateUserByToken)

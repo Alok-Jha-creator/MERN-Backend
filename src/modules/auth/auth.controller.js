@@ -36,7 +36,15 @@ class AuthController {
             status:"OK"
         })
     }
+    updateSingleRowByfilter = (req, res, next) => {
+        res.json({ data: {},
+        message: "User updated successfully",
+        status: "OK" 
+    });  
+     }
 }
+    
+
     
     const authCtrl = new AuthController();
     
