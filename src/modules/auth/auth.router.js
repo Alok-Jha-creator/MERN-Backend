@@ -6,7 +6,10 @@ authRouter.get("/activate/:token",authCtrl.activateUserByToken)
 authRouter.post("/login",authCtrl.loginUser)
 authRouter.get("/profile",authCtrl.getLoggedInUserProfile)
 authRouter.post("/forgot-password",authCtrl.forgotPasswordRequest)
-/* auth route end */
+
  
 
+authRouter.get('/me',loginCheck,authCtrl.getLoggedInUserProfile)
+authRouter.post('/:userId/edit-user',loginCheck,authCtrl.updateSingleRowByfilter)
+/* auth route end */
 module.exports=authRouter;
