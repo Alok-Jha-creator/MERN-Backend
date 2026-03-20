@@ -12,5 +12,4 @@ const loginCheck = ( allowedRole= null) => {
   }
    // return checkLogin;
 };
-
 module.exports = { loginCheck } ;
