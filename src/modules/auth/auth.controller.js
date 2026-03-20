@@ -18,7 +18,7 @@ class AuthController {
     loginUser = (req,res,next)=>{
         res.json({
             data:{},
-            message:"user login successfully",
+            message:"login successfully",
             status:"OK"
         })
     }
