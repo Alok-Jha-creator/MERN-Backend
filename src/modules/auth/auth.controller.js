@@ -5,8 +5,7 @@ class AuthController {
             message:"user registered successfully",
             status:"OK"
         })
-    }
-    
+    } 
     activateUserByToken = (req,res,next)=>{
         res.json({
            data:{},
@@ -14,7 +13,6 @@ class AuthController {
            status:"OK"
        })
     }
-    
     loginUser = (req,res,next)=>{
         res.json({
             data:{},
@@ -45,6 +43,4 @@ class AuthController {
 }
 
     const authCtrl = new AuthController();
-    
-
     module.exports=authCtrl;
