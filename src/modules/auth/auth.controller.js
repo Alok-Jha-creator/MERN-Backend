@@ -32,7 +32,7 @@ class AuthController {
     forgotPasswordRequest = (req,res,next)=>{
         res.json({
             data:{},
-            message:"password reset link sent to email",
+            message:"password reset ",
             status:"OK"
         })
     }
