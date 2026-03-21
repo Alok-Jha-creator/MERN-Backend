@@ -21,5 +21,13 @@ app.use((req,res,next)=>{
         status:"FAILED"
     })
 })
+app.use((err,req,res,next)=>{
+    console.log(err)
+    res.status(500).json({
+        data:{},
+        message:"Something went wrong",
+        status:"FAILED"
+    })
+})
 
 module.exports=app;
