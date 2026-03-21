@@ -1,5 +1,6 @@
 const express =require("express")
 const router = require("./router.config")
+const ErrorHandler = require("../middleware/error-handling.middleware")
 const app =express()
 
 
@@ -13,21 +14,19 @@ app.use(express.urlencoded({
 app.use('/api/v1',router)
 //app.use('/api/v2',router)
 
+
+
+
 //404 not found
 app.use((req,res,next)=>{
-    res.status(404).json({
-        data:{},
-        message:"Not Found",
-        status:"FAILED"
-    })
+   next({
+    code:404,
+    error: null,
+    message: "Not found",
+    status: "NOT_FOUND_ERR"
+   })
 })
-app.use((err,req,res,next)=>{
-    console.log(err)
-    res.status(500).json({
-        data:{},
-        message:"Something went wrong",
-        status:"FAILED"
-    })
-})
+
+app.use(ErrorHandler)
 
 module.exports=app;
