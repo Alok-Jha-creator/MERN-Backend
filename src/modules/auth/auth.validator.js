@@ -14,7 +14,7 @@ const RegisterDTO = Joi.object({
         "string.pattern.base":"Password must be 8-25 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character"
     }),
     confirmPassword:Joi.string().valid(Joi.ref('password')).required().messages({'any.only':'Confirm password must match password'}),
-    role:Joi.string().regex(roleExp).default('customer').required(),
+    role:Joi.string().regex(roleExp).default('customer').required().default(userRoles.CUSTOMER),
     gender:Joi.string().regex(GenderExp),
     dob:Joi.date().less('now'),
     address:Joi.string().max(500).allow(null,'').optional().default(null), 
