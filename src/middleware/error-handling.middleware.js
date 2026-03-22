@@ -14,5 +14,4 @@ const ErrorHandler=(error,req,res,next)=>{
         status:status
     });
 }
-
 module.exports = ErrorHandler;
