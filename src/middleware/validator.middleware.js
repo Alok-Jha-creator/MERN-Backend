@@ -11,15 +11,12 @@ const validateBodyData = (schema)=>{
         })
         next()
       } catch (exception) {
+        let errorBag = {}; 
         next({
-          details:{
-            name:"name not allowed to empty",
-            email:"email not allowed to empty",
-            password:"password not allowed to empty",
-            roles:"roles not allowed to empty"
-          },
+          details:errorBag,
           message:"Validation error",
           status:"VALIDATION_ERR",
+          code:422
         })
       }
     }
