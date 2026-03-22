@@ -12,6 +12,12 @@ const validateBodyData = (schema)=>{
         next()
       } catch (exception) {
         let errorBag = {}; 
+        if(exception.details && exception.details.length > 0){
+          exception.details.map((err)=>{
+           let field = err.path.pop();
+           errorBag[field] = err.message
+          })
+        }
         next({
           details:errorBag,
           message:"Validation error",
