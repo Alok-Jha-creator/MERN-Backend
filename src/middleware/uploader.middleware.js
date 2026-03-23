@@ -16,9 +16,34 @@ const uploader = (type='image') =>{
          }
       })
     let allowedTypes = ['jpg', 'jpeg', 'png', 'gif','svg', 'webp','bmp']
-  return multer ({
+    let limits = 1024 * 1024 * 3  // 3MB
+    if(type === 'audio'){
+        allowedTypes = ['mp3', 'wav', 'ogg', 'aac', 'flac']
+        limits = 1024 * 1024 * 5 // 5MB
+    }else if(type === 'doc'){
+        allowedTypes = ['pdf', 'doc', 'docx','json', 'ppt', 'pptx','txt', 'csv']
+        limits = 1024 * 1024 * 5 // 5MB
+    }else if(type === 'video'){
+        allowedTypes = ['mp4', 'avi', 'mkv', 'mov', 'wmv']
+        limits = 1024 * 1024 * 10 // 10MB
+    }
+
+    const vlidateFileType = (req,file,cb) => {
+        const ext = file.originalname.split('.').pop();
+        if(allowedTypes.includes(ext.toLowerCase())){    // .JPG --> .jpg
+            cb(null, true)
+        }else{
+         cb({  
+            code: 422,
+            message:"File type not supported",
+            status:"VALIDATION_FILE_ERROR"
+         })
+        }
+    };
+
+return multer ({
     storage: myStorage,
-    fileFilter: ()=> {},
+    fileFilter:vlidateFileType,
     limits: {
       fileSize: 1024 * 1024 * 5
     }   
