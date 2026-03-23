@@ -1,7 +1,7 @@
 const multer = require('multer');
 const fs = require('fs');
 const randomStringGenerator = require('../utilities/helpers');
-const uploader = () =>{
+const uploader = (type='image') =>{
     const myStorage = multer.diskStorage({
         destination: (req, file, cb) => {
             const path = "./public/uploads/" // if yo path exist gardaina vane folder crete gardinxa tala ko if le 
@@ -15,9 +15,9 @@ const uploader = () =>{
             cb(null, filename)
          }
       })
-
+    let allowedTypes = ['jpg', 'jpeg', 'png', 'gif','svg', 'webp','bmp']
   return multer ({
-    storage:"",
+    storage: myStorage,
     fileFilter: ()=> {},
     limits: {
       fileSize: 1024 * 1024 * 5
