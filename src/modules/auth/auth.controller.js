@@ -1,8 +1,11 @@
 class AuthController {
     registerUser = (req,res,next)=>{
         const data = req.body;
+        const file = req.file; // multer le file lai req.file ma pathaunxa but single file upload gareko le file ma pathaunxa
+        // const files = req.files; // multer le file lai req.files ma pathaunxa but multiple file upload gareko le files ma pathaunxa array 
         res.json({
-            data:{ data },    
+            data:{ data },  
+            file:{ file },  
             message:"user registered successfully",
             status:"OK"
         })
