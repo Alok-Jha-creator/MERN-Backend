@@ -1,6 +1,6 @@
 const multer = require('multer');
 const fs = require('fs');
-const randomStringGenerator = require('../utilities/helpers');
+const { randomStringGenerator } = require('../utilities/helpers');
 const uploader = (type='image') =>{
     const myStorage = multer.diskStorage({
         destination: (req, file, cb) => {

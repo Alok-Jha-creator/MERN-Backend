@@ -1,5 +1,5 @@
 const cloudinary = require('cloudinary').v2;
-const {CloudinaryConfig} = require("../config/config");
+const {CloudinaryConfig} = require("../src/config/config");
 const { fileDelete } = require('../src/utilities/helpers');
 
 class CloudinaryService{
@@ -15,17 +15,17 @@ class CloudinaryService{
         return cloudinary.url(public_id,{
         transformation: [
         {aspect_ratio:'1.0',height:height,width:width,crop:"thumb"},
-        {radius:max},
-        {fetch_format:"auto"}
+        {radius:"max"},
+       // {format:"auto"}
          ]
       })
     } 
 
 
-    
+
    async uploadMultipleFiles(files, dir = null, size = '1024*1024') {
         try {
-            if (!files && files.length) {
+            if (files && files.length) {
                 let uploadFiles =[];
                files.map((file)=> {
                 uploadFiles.push(this.singlefileUpload(file.path, dir, size))
@@ -34,7 +34,7 @@ class CloudinaryService{
             let returnFiles = [];
             settelment.forEach((uploadFiles)=>{
                 if(uploadFiles.status === "fulfilled"){
-                    return Files.push(uploadFiles.value);
+                    returnFiles.push(uploadFiles.value);
                 }      
             })
             return returnFiles;
@@ -59,7 +59,7 @@ class CloudinaryService{
         const {public_id,secure_url} = await cloudinary.uploader.upload(filePath, {
             unique_filename: true,
             folder: dir ? "/ecom-50" + dir : '/ecom-50',
-            format: "auto",
+           // format: "auto",
         })
 
     // optimize    
@@ -72,6 +72,7 @@ class CloudinaryService{
         thumUrl: thumUrl
     }
        } catch (exception) {
+        console.error("Cloudinary Error:", exception);
         throw {
             code: 500,
             message: "Cloudinary upload error",
