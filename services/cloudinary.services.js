@@ -10,24 +10,12 @@ class CloudinaryService{
        })
     }
     async optimizeImage(public_id,size = '1024*1024') {
-        try {
-            const optimizedImage = await cloudinary.uploader.upload(imagePath, {
-                transformation: [
-                    { width: 800, height: 800, crop: "limit" },
-                    { quality: "auto" }
-                ],
-                format: "auto",
-                unique_filename: true,
-                folder: '/ecom-50/optimized',
-            });
-            return optimizedImage;
-        } catch (exception) {
-            throw {
-                code: 500,
-                message: "Cloudinary optimization error",
-                status: "CLOUDINARY_OPTIMIZATION_ERR",
-            };
-        }
+      cloudinary.image("woman-blackdress-stairs.png",{transformation: [
+        {gravity: "face",height:200,width:200,crop:"thumb"},
+        {radius:max},
+        {fetch_format:"auto"}
+         ]
+      })
     } 
 
 
