@@ -1,11 +1,22 @@
 const cloudinarySvc = require('../../../services/cloudinary.services');
+const bcrypt = require('bcryptjs');
+const { randomStringGenerator } = require('../../utilities/helpers');
+
+
 class AuthController {
     registerUser = async (req,res,next)=>{
        try {
         const data = req.body;
-        const file = req.file; // multer le file lai req.file ma pathaunxa but single file upload gareko le file ma pathaunxa
-        // const files = req.files; // multer le file lai req.files ma pathaunxa but multiple file upload gareko le files ma pathaunxa array 
+        const file = req.file; 
         data.image= await cloudinarySvc.singlefileUpload(file.path, 'users/', "200*200");
+
+        //const salt = bcrypt.genSaltSync(12);
+        //data.password=bcrypt.hashSync(data.password, "salt");
+        data.password = bcrypt.hashSync(data.password, 12);
+            // Activation process plan
+        data.activationToken = randomStringGenerator(30);
+
+        
         res.json({
             data:{ data },    
             message:"user registered successfully",
