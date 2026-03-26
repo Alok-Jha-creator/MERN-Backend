@@ -2,7 +2,6 @@ const cloudinarySvc = require('../../../services/cloudinary.services');
 const bcrypt = require('bcryptjs');
 const { randomStringGenerator } = require('../../utilities/helpers');
 
-
 class AuthController {
     registerUser = async (req,res,next)=>{
        try {
@@ -13,7 +12,8 @@ class AuthController {
         //const salt = bcrypt.genSaltSync(12);
         //data.password=bcrypt.hashSync(data.password, "salt");
         data.password = bcrypt.hashSync(data.password, 12);
-            // Activation process plan
+           
+        // Activation process plan
         data.activationToken = randomStringGenerator();
 
         
@@ -26,8 +26,6 @@ class AuthController {
         next(exception)
        }
     } ;
-
-
 
 
     activateUserByToken = (req,res,next)=>{
