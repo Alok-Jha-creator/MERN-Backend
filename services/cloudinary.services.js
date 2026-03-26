@@ -14,14 +14,11 @@ class CloudinaryService{
         let [width, height] = size.split("*")
         return cloudinary.url(public_id,{
         transformation: [
-        {aspect_ratio:'1.0',height:height,width:width,crop:"thumb"},
-        {radius:"max"},
+        {aspect_ratio:'1.0',height:height,width:width,crop:"thumb"},     
        // {format:"auto"}
          ]
       })
     } 
-
-
 
    async uploadMultipleFiles(files, dir = null, size = '1024*1024') {
         try {
