@@ -29,7 +29,6 @@ class AuthController {
        }
     } ;
 
-
     activateUserByToken = (req,res,next)=>{
         res.json({
            data:{},
