@@ -14,7 +14,7 @@ class AuthController {
         //data.password=bcrypt.hashSync(data.password, "salt");
         data.password = bcrypt.hashSync(data.password, 12);
             // Activation process plan
-        data.activationToken = randomStringGenerator(30);
+        data.activationToken = randomStringGenerator();
 
         
         res.json({
