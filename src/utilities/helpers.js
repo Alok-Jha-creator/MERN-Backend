@@ -28,5 +28,10 @@ module.exports ={
         return fs.unlinkSync(path);
       }
       return false;
+   },
+   createDate:(date,days)=>{
+      date= new Date(date)
+      date= new Date(date.getTime() + (days*24*60*60*1000))
+      return date;
    }
 }

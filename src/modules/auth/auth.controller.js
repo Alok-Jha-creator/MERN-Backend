@@ -1,6 +1,6 @@
 const cloudinarySvc = require('../../../services/cloudinary.services');
 const bcrypt = require('bcryptjs');
-const { randomStringGenerator } = require('../../utilities/helpers');
+const { randomStringGenerator, createDate } = require('../../utilities/helpers');
 
 class AuthController {
     registerUser = async (req,res,next)=>{
@@ -15,6 +15,8 @@ class AuthController {
            
         // Activation process plan
         data.activationToken = randomStringGenerator();
+        data.expireTime = createDate(new Date(), 1); // 1 day ko activation token valid hunxa
+        data.status = "inactive";
 
         
         res.json({
