@@ -24,6 +24,7 @@
      -e.g `db.users.insertMany([{name:"",email:"",password:"",role:""},{name:"",email:"",password:"",role:"",}])`
         -return ->Acknownlegement ({insertId:["",""],acknowlegment:boolean})
 ### Read (**R**)
+
     -`db.<collectionName>.find(filter,projection,options)`
       -filter type=> json where 
     -`db.<collectionName>.findOne(filter,projection,options)`
@@ -49,3 +50,7 @@
         $lt, $gt , $lte ,$gte ,$eq,$ne,$in,$nin,$and ,$or ,$regex
             eg. age:{ $lt:18 }   another eg. {$and:[ {role:"admin",{address:"kathmandu"}} ]}
     ```
+
+
+### Update (**U**)
+    
