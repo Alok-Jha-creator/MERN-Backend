@@ -23,3 +23,7 @@
      -`db.<collectionName>.insertMany([Object]);`
      -e.g `db.users.insertMany([{name:"",email:"",password:"",role:""},{name:"",email:"",password:"",role:"",}])`
         -return ->Acknownlegement ({insertId:["",""],acknowlegment:boolean})
+### Read (**R**)
+    -`db.<collectionName>.find(filter,projection,options)`
+      -filter type=> json where 
+    -`db.<collectionName>.findOne(filter,projection,options)`
