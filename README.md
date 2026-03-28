@@ -27,3 +27,25 @@
     -`db.<collectionName>.find(filter,projection,options)`
       -filter type=> json where 
     -`db.<collectionName>.findOne(filter,projection,options)`
+        ```
+        Projection ~SELECT ....
+        ```
+    -```json
+        {
+            key:"value"     // key = "value"
+        }
+
+        {
+            key1:"value2"     // key1 = "value1" AND "key2"="value2"
+        }
+
+        {
+            $op: "expression"
+        }
+
+        {
+           key: {$op: "expression"}
+        }
+        $lt, $gt , $lte ,$gte ,$eq,$ne,$in,$nin,$and ,$or ,$regex
+            eg. age:{ $lt:18 }   another eg. {$and:[ {role:"admin",{address:"kathmandu"}} ]}
+    ```
