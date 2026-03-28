@@ -55,3 +55,14 @@
 ### Update (**U**)
     -`db.<collectionName>.updateOne(filter,{$set: JsonObj},{upsert:1,0})`
     -`db.<collectionName>.updateMany(filter,{$set: JsonObj},{upsert:1,0})`
+
+### Delete (**D**)
+    -`db.<collectionName>.deleteOne(filter)`
+    -`db.<collectionName>.deleteMany(filter)`
+
+### Aggregation pipeline
+    -staged Query
+     -pipeline
+        [
+            {pipeline}
+        ]
