@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { userRoles, Gender } = require('../../config/constants');
 
 const UserSchema = new mongoose.Schema({
     name:{
@@ -19,11 +20,17 @@ const UserSchema = new mongoose.Schema({
     phone:String,
     role:{
         type:String,
-        enum:["admin","customer","seller"]
+        //enum:["admin","customer","seller"]
+        enum:Object.values(userRoles),
+        default:userRoles.CUSTOMER
     },
-    gender:"",
-    dob:"",
-    address:"",
+    gender:{
+        type:String,
+        enum:Object.values(Gender),
+        default: null
+    },
+    dob:Date,
+    address:String,
     image:"",
 
     activationToken:"",
