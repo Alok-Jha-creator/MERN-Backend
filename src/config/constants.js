@@ -8,5 +8,9 @@ const Gender ={
     FEMALE:'female',
     OTHER:'other'
 }
+const Status ={
+    ACTIVE:'active',
+    INACTIVE:'inactive'
+}
 
-module.exports={userRoles,Gender};
+module.exports={userRoles,Gender,Status};

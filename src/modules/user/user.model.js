@@ -31,11 +31,22 @@ const UserSchema = new mongoose.Schema({
     },
     dob:Date,
     address:String,
-    image:"",
+    image:{
+        public_id: String,
+        secure_url: String,
+        thumUrl: String
+    },
 
-    activationToken:"",
-    expiryTime:"",
-    status:""
+    activationToken:String,
+    expiryTime:Date,
+    status:{
+        type:String,
+        enum:Object.values(Status),
+        default:Status.INACTIVE
+    },
+    timestamps:true,
+    autoIndex:true,
+    autoCreate:true
 })
 
 const UserModel = mongoose.model("",UserSchema)
