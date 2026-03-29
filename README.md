@@ -1,7 +1,22 @@
 # api-50
+## Request Response Cycle
+### How code flows
+```
+Route ----> Middlewere/Controller------>Services/Model------->Database Server
+                    response sent 
+
+```
+
+
 ## features
  ### Authentication and Authorization
-    - update my Profile / access the other fetures allowed
+    -Resistration
+    -Activation
+    -Login
+    -forget Password
+    -Reset Password
+    -Your Profile
+    -Update my Profile / access the other fetures allowed
     -Logout
 
 ### Multer
