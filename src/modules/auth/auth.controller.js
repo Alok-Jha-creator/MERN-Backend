@@ -17,7 +17,7 @@ class AuthController {
         // Activation process plan
         data.activationToken = randomStringGenerator();
         data.expireTime = createDate(new Date(), 1); // 1 day ko activation token valid hunxa
-        data.status = Status.INACTIVE;
+        data.status = Status.INACTIVE; 
 
         
         res.json({
@@ -66,5 +66,5 @@ class AuthController {
      }
 }
 
-    const authCtrl = new AuthController();
-    module.exports=authCtrl;
+const authCtrl = new AuthController();
+module.exports=authCtrl;
