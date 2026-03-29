@@ -66,3 +66,8 @@
         [
             {pipeline}
         ]
+
+### SQL ->ORM(Object Relational Mapping/Model)
+    -- sequlize,typearm,Prisma
+### NOSQL -> ORM(Object Relational Mapping/Model)
+    -- mongoose,

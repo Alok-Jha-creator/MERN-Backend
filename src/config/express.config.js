@@ -15,8 +15,6 @@ app.use('/api/v1',router)
 //app.use('/api/v2',router)
 
 
-
-
 //404 not found
 app.use((req,res,next)=>{
    next({
