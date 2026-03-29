@@ -35,8 +35,8 @@ mongodbInit() // mongodbInit asychronous function, so we use then and catch to h
                 console.log("press Ctrl + C to disconnect the server");
             }
         });
-    } catch (err) { // Fix: Add 'err' parameter to catch block
-        console.error("Error initializing the server:", err);
+    } catch (exception) { // Fix: Add 'err' parameter to catch block
+        console.log("Errr in server access...");
         process.exit(1); // Exit the process with a failure code
     }
 })(); 
