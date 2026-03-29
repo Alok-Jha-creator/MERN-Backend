@@ -88,4 +88,6 @@ Route ----> Middlewere/Controller------>Services/Model------->Database Server
     -- mongoose,
 
 
-###
+### DB
+    -find all data(entity) that might be used in our project (ecommerce)
+      -with each data property
