@@ -3,11 +3,13 @@ const bcrypt = require('bcryptjs');
 const { randomStringGenerator, createDate } = require('../../utilities/helpers');
 const { Status } = require('../../config/constants');
 const authService = require('./auth.service');
+const userService = require('../user/user.service');
 
 class AuthController {
     registerUser = async (req,res,next)=>{
        try {  
         const data= await authService.transformUserForResistration(req);
+        const user=await userService.storeUser(data);
         res.json({
             data:{ data },    
             message:"user registered successfully",
