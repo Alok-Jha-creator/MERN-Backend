@@ -2,22 +2,13 @@ const cloudinarySvc = require('../../../services/cloudinary.services');
 const bcrypt = require('bcryptjs');
 const { randomStringGenerator, createDate } = require('../../utilities/helpers');
 const { Status } = require('../../config/constants');
+const authService = require('./auth.service');
 
 class AuthController {
     registerUser = async (req,res,next)=>{
        try {
-        const data = req.body;
-        const file = req.file; 
-        data.image= await cloudinarySvc.singlefileUpload(file.path, 'users/', "200*200");
-
-        //const salt = bcrypt.genSaltSync(12);
-        //data.password=bcrypt.hashSync(data.password, "salt");
-        data.password = bcrypt.hashSync(data.password, 12);
-           
-        // Activation process plan
-        data.activationToken = randomStringGenerator();
-        data.expireTime = createDate(new Date(), 1); // 1 day ko activation token valid hunxa
-        data.status = Status.INACTIVE; 
+        
+        const data= await authService.transformUserForResistration(req);
 
         
         res.json({
