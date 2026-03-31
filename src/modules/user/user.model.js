@@ -49,5 +49,5 @@ const UserSchema = new mongoose.Schema({
     autoCreate:true
 })
 
-const UserModel = mongoose.model("",UserSchema)
+const UserModel = mongoose.model("User",UserSchema)
 module.exports = UserModel;

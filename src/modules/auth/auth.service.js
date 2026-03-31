@@ -16,8 +16,6 @@ class AuthService{
                 const file = req.file; 
                 data.image= await cloudinarySvc.singlefileUpload(file.path, 'users/', "200*200");
               }
-            
-
             //const salt = bcrypt.genSaltSync(12);
             //data.password=bcrypt.hashSync(data.password, "salt");
             data.password = bcrypt.hashSync(data.password, 12);

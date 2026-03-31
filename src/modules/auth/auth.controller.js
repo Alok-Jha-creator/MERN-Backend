@@ -11,7 +11,7 @@ class AuthController {
         const data= await authService.transformUserForResistration(req);
         const user=await userService.storeUser(data);
         res.json({
-            data:{ data },    
+            data: userService.getUserPublicProfile(user),    
             message:"user registered successfully",
             status:"OK"
         })

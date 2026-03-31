@@ -15,6 +15,13 @@ class UserService{
         _id:user._id,
         name:user.name,
         email:user.email,
+        role:user.role,
+        phone:user.phone,
+        gender:user.gender,
+        dob:user.dob,
+        address:user.address,
+        image:user.image
+        
     }
         
     
