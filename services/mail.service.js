@@ -22,4 +22,31 @@ class EmailService{
             throw {code:500,error, message:"SMTP Not connected", status:"EMAIL_SERVICE_INIT_ERR"}
         }
     }
+
+    async sendEmail({to, subject, text=null, html, cc=null, bcc=null, attachments=null,message}){
+
+        try 
+        {
+        let messageBody={
+            from: SmtpConfig.smtpForm,
+            to:to,
+            subject:subject,
+           //  text:"",
+             html:"",
+            // cc:"",
+            // bcc:"",
+            // attachments:""
+        };
+        
+        if(text) messageBody.text=text;
+        if(html) messageBody.html=html;
+        if(cc) messageBody.cc=cc;
+        if(bcc) messageBody.bcc=bcc;
+        if(attachments) messageBody.attachments=attachments;
+
+            await this.#transport.sendMail()
+        } catch (error) {
+            throw {code:500,error, message:"Failed to send email", status:"EMAIL_SEND_ERR"}
+        }
+    }
 }
