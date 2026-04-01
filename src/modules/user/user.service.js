@@ -20,8 +20,8 @@ class UserService{
         gender:user.gender,
         dob:user.dob,
         address:user.address,
-        image:user.image
-        
+        image:user.image,
+        status:user.status    
     }
         
     
