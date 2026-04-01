@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { userRoles, Gender } = require('../../config/constants');
+const { userRoles, Gender, Status } = require('../../config/constants');
 
 const UserSchema = new mongoose.Schema({
     name:{
@@ -43,7 +43,8 @@ const UserSchema = new mongoose.Schema({
         type:String,
         enum:Object.values(Status),
         default:Status.INACTIVE
-    },
+    }
+},{
     timestamps:true,
     autoIndex:true,
     autoCreate:true
