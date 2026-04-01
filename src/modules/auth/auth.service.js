@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs")
 const {randomStringGenerator,createDate}= require("../../utilities/helpers")
 const {Status} = require("../../config/constants")
 
-class AuthService{
+class AuthMailService{
     async transformUserForResistration(req){
         try {
             const data = req.body;
@@ -31,4 +31,4 @@ class AuthService{
     }
 }
 
-module.exports = new AuthService()
+module.exports = new AuthMailService()

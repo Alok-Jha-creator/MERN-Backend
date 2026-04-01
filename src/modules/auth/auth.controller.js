@@ -1,15 +1,15 @@
-const cloudinarySvc = require('../../../services/cloudinary.services');
-const bcrypt = require('bcryptjs');
-const { randomStringGenerator, createDate } = require('../../utilities/helpers');
-const { Status } = require('../../config/constants');
+
 const authService = require('./auth.service');
 const userService = require('../user/user.service');
+const authMail = require('./auth.mail');
 
 class AuthController {
     registerUser = async (req,res,next)=>{
        try {  
         const data= await authService.transformUserForResistration(req);
         const user=await userService.storeUser(data);
+
+        await authMail.notifyToActivateUserAccount(user);
         res.json({
             data: userService.getUserPublicProfile(user),    
             message:"user registered successfully",

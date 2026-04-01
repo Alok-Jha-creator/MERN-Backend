@@ -37,7 +37,7 @@ class EmailService{
             // bcc:"",
             // attachments:""
         };
-        
+
         if(text) messageBody.text=text;
         if(html) messageBody.html=html;
         if(cc) messageBody.cc=cc;
@@ -50,3 +50,6 @@ class EmailService{
         }
     }
 }
+
+
+module.exports=EmailService;

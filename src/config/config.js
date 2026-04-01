@@ -22,10 +22,17 @@ const SmtpConfig = {
     smtpUser: process.env.SMTP_USER,
     smtpPassword: process.env.SMTP_PASSWORD,
     smtpForm: process.env.SMTP_FORM
-};
+}
+
+const AppConfig = {
+    frontendUrl: process.env.FRONTEND_URL
+}
+
+
 
 module.exports = {
     CloudinaryConfig,
     DbConfig,
-    SmtpConfig
+    SmtpConfig,
+    AppConfig
 }
