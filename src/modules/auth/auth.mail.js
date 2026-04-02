@@ -4,7 +4,7 @@ const { AppConfig } = require("../../config/config");
 class AuthEmailService extends EmailService{
    
 
-    async notifyToActivateUserAccount(){
+    async notifyToActivateUserAccount(user){
         try {
             let activationLink= AppConfig.frontendUrl+"verify/"+user.activationToken;
             return this.sendEmail({

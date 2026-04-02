@@ -1,7 +1,7 @@
 const UserModel = require("./user.model")
 
 class UserService{
-   async storeUser(){
+   async storeUser(data){
         try {
             const user =new UserModel(data)
             return await user.save()
