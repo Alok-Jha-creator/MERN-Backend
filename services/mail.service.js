@@ -37,14 +37,14 @@ class EmailService{
             // bcc:"",
             // attachments:""
         };
-
+        if(message) messageBody.html = message;
         if(text) messageBody.text=text;
         if(html) messageBody.html=html;
         if(cc) messageBody.cc=cc;
         if(bcc) messageBody.bcc=bcc;
         if(attachments) messageBody.attachments=attachments;
 
-            await this.#transport.sendMail()
+            await this.#transport.sendMail(messageBody)
         } catch (error) {
             throw {code:500,error, message:"Failed to send email", status:"EMAIL_SEND_ERR"}
         }

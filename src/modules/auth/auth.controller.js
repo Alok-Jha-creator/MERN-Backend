@@ -8,7 +8,7 @@ class AuthController {
        try {  
         const data= await authService.transformUserForResistration(req);
         const user=await userService.storeUser(data);
-
+           console.log("USER>>>", user);
         await authMail.notifyToActivateUserAccount(user);
         res.json({
             data: userService.getUserPublicProfile(user),    
