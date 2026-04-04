@@ -25,10 +25,15 @@ class AuthController {
         const token = req.params.token;
         const userdetail = await authService.getSingleRowByFilter({
             activationToken: token
-        });
+        })
+        //if user not found
+        if(!userdetail) throw {code:404, message:"User has been already activated or token not found", status:"USER_ACTIVATION_ERR"}
        } catch (exception) {
         next(exception)
        }
+       //if user found
+       const today = Date.now();
+       const expiryTime = userdetail.expiryTime.getTime();
     }
     loginUser = (req,res,next)=>{
         res.json({
