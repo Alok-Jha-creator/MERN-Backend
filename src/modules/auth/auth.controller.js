@@ -20,12 +20,15 @@ class AuthController {
        }
     } ;
 
-    activateUserByToken = (req,res,next)=>{
-        res.json({
-           data:{},
-           message:"user Activated successfully",
-           status:"OK"
-       })
+    activateUserByToken = async (req,res,next)=>{
+       try {
+        const token = req.params.token;
+        const userdetail = await authService.getSingleRowByFilter({
+            activationToken: token
+        });
+       } catch (exception) {
+        next(exception)
+       }
     }
     loginUser = (req,res,next)=>{
         res.json({
