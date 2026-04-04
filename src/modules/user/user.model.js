@@ -37,7 +37,10 @@ const UserSchema = new mongoose.Schema({
         thumUrl: String
     },
 
-    activationToken:String,
+    activationToken:{
+        type:String,
+        index:true
+    },
     expiryTime:Date,
     status:{
         type:String,

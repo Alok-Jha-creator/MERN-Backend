@@ -10,6 +10,16 @@ class UserService{
         }
     }
 
+    async getSingleRowByFilter(filter){
+        try {
+            const userdetail = await UserModel.findOne(filter)
+            return userdetail
+        } catch (exception) {
+             throw exception
+            
+        }
+    }
+
    getUserPublicProfile(user){
     return {
         _id:user._id,
