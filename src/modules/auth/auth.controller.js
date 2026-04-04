@@ -34,6 +34,11 @@ class AuthController {
        //if user found
        const today = Date.now();
        const expiryTime = userdetail.expiryTime.getTime();
+       if(today > expiryTime) throw {code:400, message:"Token has been expired", status:"USER_ACTIVATION_ERR"}
+       
+    }
+    async resendActivationToken(req,res,next){
+        //TODO: resend activation token
     }
     loginUser = (req,res,next)=>{
         res.json({
