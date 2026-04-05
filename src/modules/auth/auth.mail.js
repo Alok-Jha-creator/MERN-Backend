@@ -81,6 +81,20 @@ class AuthEmailService extends EmailService{
             
         }
     }
+
+    async notifyWelcomeMessage(user){
+        try {
+            const to = AppConfig.frontendURL+"/"
+            return this.sendEmail({
+                to:user.email,
+                subject:"Thank you for activating your account",
+                message: `<!doctype html>`
+            })
+        } catch (error) {
+             throw {code:500,error, message:"Failed to send email", status:"EMAIL_SEND_ERR"}
+            
+        }
+    }
 }
 
 

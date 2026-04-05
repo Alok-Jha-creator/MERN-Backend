@@ -43,7 +43,9 @@ class AuthController {
         expireTime : null, // 1 day ko activation token valid hunxa
         status : Status.ACTIVE
         }
-        await userService.updateSingleRowByfilter(filter);
+        await userService.updateSingleRowByfilter(filter, update);
+        // notify user about account activation
+        await authMail.notifyWelcomeMessage(userdetail);
        
     }
 

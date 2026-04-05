@@ -19,9 +19,10 @@ class UserService{
             
         }
     }
-    async updateSingleRowByfilter(filter,update){
+    async updateSingleRowByfilter(filter,data){
         try {
-            
+           const userDetail= await UserModel.findOneAndUpdate(filter,{$set:data },{new:true})
+              return userDetail
         } catch (exception) {
                 throw exception
                 
