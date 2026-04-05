@@ -19,6 +19,14 @@ class UserService{
             
         }
     }
+    async updateSingleRowByfilter(filter,update){
+        try {
+            
+        } catch (exception) {
+                throw exception
+                
+            }
+    }
 
    getUserPublicProfile(user){
     return {
