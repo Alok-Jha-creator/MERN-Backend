@@ -1,4 +1,5 @@
 
+const Status = require('../../config/constants').Status;
 const authService = require('./auth.service');
 const userService = require('../user/user.service');
 const authMail = require('./auth.mail');
@@ -23,7 +24,7 @@ class AuthController {
     activateUserByToken = async (req,res,next)=>{
        try {
         const token = req.params.token;
-        const userdetail = await authService.getSingleRowByFilter({
+        let userdetail = await authService.getSingleRowByFilter({
             activationToken: token
         })
         //if user not found
@@ -43,9 +44,15 @@ class AuthController {
         expireTime : null, // 1 day ko activation token valid hunxa
         status : Status.ACTIVE
         }
-        await userService.updateSingleRowByfilter(filter, update);
+        userdetail= await userService.updateSingleRowByfilter( {_id:userdetail._id} , update);
         // notify user about account activation
         await authMail.notifyWelcomeMessage(userdetail);
+        //respond to client
+        res.json({
+            data: userService.getUserPublicProfile(userdetail),    
+            message:"user account activated successfully",
+            status:"OK"
+        })
        
     }
 
