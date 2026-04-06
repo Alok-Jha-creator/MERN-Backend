@@ -154,7 +154,7 @@ class AuthEmailService extends EmailService{
                     </table>
                 </body>
             </html>`
-            )
+            
             })
         } catch (error) {
              throw {code:500,error, message:"Failed to send email", status:"EMAIL_SEND_ERR"}
