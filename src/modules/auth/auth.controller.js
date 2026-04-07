@@ -50,7 +50,7 @@ class AuthController {
         //respond to client
         res.json({
             data: userService.getUserPublicProfile(userdetail),    
-            message:"user account activated successfully",
+            message:"user account has been activated successfully",
             status:"OK"
         })
        
