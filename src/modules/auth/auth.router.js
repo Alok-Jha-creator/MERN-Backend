@@ -8,6 +8,7 @@ const uploader = require('../../middleware/uploader.middleware.js');
 // name,email,phone nuber,role,password,address,image,dob,gender,
 // status,activationToken,forgetPassword,expirytime,createdAt,updatedAt.createdBy,updatedBy,_Id,
 /* Auth route */
+
 authRouter.post("/register",uploader().single('image'),validateBodyData(RegisterDTO), authCtrl.registerUser)
 authRouter.get("/activate/:token",authCtrl.activateUserByToken)
     //resend activation token:TODO
