@@ -52,8 +52,7 @@ class AuthController {
             data: userService.getUserPublicProfile(userdetail),    
             message:"user account has been activated successfully",
             status:"OK"
-        })
-       
+        })  
     }
 
     async resendActivationToken(req,res,next){
