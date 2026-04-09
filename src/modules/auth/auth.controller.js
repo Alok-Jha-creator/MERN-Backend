@@ -85,7 +85,7 @@ class AuthController {
         message: "User updated successfully",
         status: "OK" 
     });  
-     }
+    }
 }
 
 const authCtrl = new AuthController();
