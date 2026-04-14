@@ -88,5 +88,6 @@ class AuthController {
     }
 }
 
+
 const authCtrl = new AuthController();
 module.exports=authCtrl;
