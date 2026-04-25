@@ -76,7 +76,7 @@ class AuthController {
     forgotPasswordRequest = (req,res,next)=>{
         res.json({
             data:{},
-            message:"password reset ",
+            message:"password reset successfully",
             status:"OK"
         })
     }
