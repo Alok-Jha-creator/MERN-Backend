@@ -34,7 +34,7 @@ const ErrorHandler = (error, req, res, next) => {
     if (error.code === 11000) {
         code = 409  // Conflict
         const field = Object.keys(error.keyPattern)[0]
-        message = `${field} already exists`
+        message = `${field} already exist`
         status = "DUPLICATE_ERROR"
     }
 
@@ -51,5 +51,4 @@ const ErrorHandler = (error, req, res, next) => {
         status: status
     });
 }
-
 module.exports = ErrorHandler;
