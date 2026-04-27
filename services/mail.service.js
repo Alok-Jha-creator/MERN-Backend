@@ -43,7 +43,6 @@ class EmailService{
         if(cc) messageBody.cc=cc;
         if(bcc) messageBody.bcc=bcc;
         if(attachments) messageBody.attachments=attachments;
-
             await this.#transport.sendMail(messageBody)
         } catch (error) {
             throw {code:500,error, message:"Failed to send email", status:"EMAIL_SEND_ERR"}
