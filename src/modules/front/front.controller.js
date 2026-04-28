@@ -16,8 +16,6 @@ class FrontController {
         };
         res.json({ success: true, data: data, message: "data fetched successfully", status: 200 });
     }
-
 }
-
 const frontCtrl = new FrontController();
 module.exports = frontCtrl;
