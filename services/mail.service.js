@@ -36,6 +36,7 @@ class EmailService{
             // cc:"",
             // bcc:"",
             // attachments:""
+            
         };
         if(message) messageBody.html = message;
         if(text) messageBody.text=text;

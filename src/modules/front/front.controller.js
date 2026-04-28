@@ -11,6 +11,7 @@ class FrontController {
                 { id: 1, title: "banner One", img: "https://placehold.co/600x400", link: "#" },
                 { id: 2, title: "banner Two", img: "https://placehold.co/600x400", link: "#" },
                 { id: 3, title: "banner Three", img: "https://placehold.co/600x400", link: "#" },
+                { id: 4, title: "banner Four", img: "https://placehold.co/600x400", link: "#" },
             ],
         };
         res.json({ success: true, data: data, message: "data fetched successfully", status: 200 });
