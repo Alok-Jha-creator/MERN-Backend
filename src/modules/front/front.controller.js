@@ -1,5 +1,4 @@
 class FrontController {
-
     getHome = (req, res, next) => {
         res.json({ success: true, message: "hello world", status: 200 });
     }
