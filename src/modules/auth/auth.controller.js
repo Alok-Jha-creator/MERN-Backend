@@ -3,6 +3,7 @@ const Status = require('../../config/constants').Status;
 const authService = require('./auth.service');
 const userService = require('../user/user.service');
 const authMail = require('./auth.mail');
+const { randomStringGenerator, createDate } = require('../../utilities/helpers');
 
 class AuthController {
     registerUser = async (req,res,next)=>{
@@ -56,7 +57,45 @@ class AuthController {
     }
 
     async resendActivationToken(req,res,next){
-        //TODO: resend activation token
+        try {
+            const token = req.params.token;
+            let userdetail = await authService.getSingleRowByFilter({
+                activationToken: token
+            })
+            //if user not found
+            if(!userdetail) throw {code:404, message:"User has been already activated or token not found", status:"USER_ACTIVATION_ERR"}
+           } catch (exception) {
+            next(exception)
+           }
+           //if user found
+           const today = Date.now();
+           const expiryTime = userdetail.expiryTime.getTime();
+           // expiry
+           if(today <= expiryTime){
+            //generate new token and update user record
+             throw {
+                code:400, 
+                message:"Token not expired",
+                status:"ACTIVATION_TOKEN_NOT_EXPIRED"}
+           }
+             //activate user account
+            const update ={
+            activationToken : randomStringGenerator(),
+            expireTime : createDate(new Date(),1), // 1 day ko activation token valid hunxa
+            status : Status.INACTIVE,
+            };
+            userdetail= await userService.updateSingleRowByfilter( 
+                {_id:userdetail._id},
+                 update
+                );
+            
+            await authMail.notifyToActivateUserAccount(userdetail);
+            //respond to client
+            res.json({
+                data: userService.getUserPublicProfile(userdetail),    
+                message:"user account has been activated successfully",
+                status:"OK"
+            })  
     }
 
     loginUser = (req,res,next)=>{
