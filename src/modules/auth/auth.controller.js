@@ -54,7 +54,7 @@ class AuthController {
             message:"user account has been activated successfully",
             status:"OK"
         })  
-    }
+    };
 
     async resendActivationToken(req,res,next){
         try {
@@ -92,11 +92,15 @@ class AuthController {
             await authMail.notifyToActivateUserAccount(userdetail);
             //respond to client
             res.json({
-                data: userService.getUserPublicProfile(userdetail),    
-                message:"user account has been activated successfully",
+                data: null,    
+                message:"A new activation token has been sent to your email address, please check your email",
                 status:"OK"
-            })  
+            });
+        
     }
+
+
+
 
     loginUser = (req,res,next)=>{
         res.json({
@@ -126,7 +130,6 @@ class AuthController {
     });  
     }
 }
-
 
 const authCtrl = new AuthController();
 module.exports=authCtrl;

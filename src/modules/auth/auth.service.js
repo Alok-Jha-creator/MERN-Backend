@@ -22,7 +22,7 @@ class AuthMailService{
            
             // Activation process plan
             data.activationToken = randomStringGenerator();
-            data.expireTime = createDate(new Date(), 1); // 1 day ko activation token valid hunxa
+            data.expireTime = createDate(new Date(), 0.00016); // 1 day ko activation token valid hunxa
             data.status = Status.INACTIVE; 
             return data;
         } catch (exception) {
