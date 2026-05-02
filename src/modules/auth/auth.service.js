@@ -2,8 +2,9 @@ const cloudinarySvc = require("../../../services/cloudinary.services")
 const bcrypt = require("bcryptjs")
 const {randomStringGenerator,createDate}= require("../../utilities/helpers")
 const {Status} = require("../../config/constants")
+const UserModel = require("../user/user.model")
 
-class AuthMailService{
+class AuthService{
     async transformUserForResistration(req){
         try {
             const data = req.body;
@@ -29,6 +30,13 @@ class AuthMailService{
             throw exception
         }
     }
+    async getSingleRowByFilter(filter){
+        try {
+            return await UserModel.findOne(filter);
+        } catch (exception) {
+            throw exception
+        }
+    }
 }
 
-module.exports = new AuthMailService()
+module.exports = new AuthService()

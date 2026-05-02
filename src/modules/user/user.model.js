@@ -41,7 +41,7 @@ const UserSchema = new mongoose.Schema({
         type:String,
         index:true
     },
-    expiryTime:Date,
+    expireTime:Date,
     status:{
         type:String,
         enum:Object.values(Status),

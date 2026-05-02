@@ -1,7 +1,7 @@
 const Joi = require("joi");
 const {userRoles, Gender} = require("../../config/constants");
 
-const roleExp = /^(custumer|seller)$/
+const roleExp = /^(customer|seller)$/
 const GenderExp = /^(male|female|other)$/
 const PasswordExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,25}$/
 
