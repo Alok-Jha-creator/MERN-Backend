@@ -4,6 +4,8 @@ const userService = require('../user/user.service');
 const authMail = require('./auth.mail');
 const { randomStringGenerator, createDate } = require('../../utilities/helpers');
 const e = require('express');
+const jwt = require('jsonwebtoken');
+const { AppConfig } = require('../../config/config');
 
 class AuthController {
     registerUser = async (req, res, next) => {
@@ -122,6 +124,14 @@ class AuthController {
            }
            // generate token --> jwt(jeson web token)
                 // 3 part- header, payload, signature
+           const accessToken = jwt.sign({sub:userDetail._id,typ:"Bearer"},AppConfig.jwtSecret,{expiresIn:"1d"} )
+           // RefresToken
+           res.json({
+                data: 
+                accessToken,
+                message: "Login successful",
+                status: "LOGIN_SUCCESS"
+           })
 
         } catch (exception) {
             next(exception)
