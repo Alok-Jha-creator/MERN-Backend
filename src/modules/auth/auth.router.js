@@ -12,13 +12,12 @@ const uploader = require('../../middleware/uploader.middleware.js');
 authRouter.post("/register",uploader().single('image'),validateBodyData(RegisterDTO), authCtrl.registerUser)
 authRouter.get("/activate/:token",authCtrl.activateUserByToken)
 authRouter.get("/resend-activation-token/:token",authCtrl.resendActivationToken)
-
-
 authRouter.post("/login",validateBodyData(loginDTO),authCtrl.loginUser)
+authRouter.get('/me',loginCheck(['admin']),authCtrl.getLoggedInUserProfile)
+
 authRouter.get("/profile",authCtrl.getLoggedInUserProfile)
 authRouter.post("/forgot-password",authCtrl.forgotPasswordRequest)
 
-authRouter.get('/me',loginCheck(['admin']),authCtrl.getLoggedInUserProfile)
 authRouter.post('/:userId/edit-user',loginCheck(),authCtrl.updateSingleRowByfilter)
 /* auth route end */
 module.exports=authRouter;

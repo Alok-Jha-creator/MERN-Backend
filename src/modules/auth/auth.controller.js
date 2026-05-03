@@ -6,6 +6,7 @@ const { randomStringGenerator, createDate } = require('../../utilities/helpers')
 const e = require('express');
 const jwt = require('jsonwebtoken');
 const { AppConfig } = require('../../config/config');
+const bcrypt = require('bcryptjs');
 
 class AuthController {
     registerUser = async (req, res, next) => {
