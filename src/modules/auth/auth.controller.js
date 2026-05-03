@@ -125,7 +125,7 @@ class AuthController {
            }
            // generate token --> jwt(jeson web token)
                 // 3 part- header, payload, signature
-           const accessToken = jwt.sign({sub:userDetail._id,typ:"Bearer"},AppConfig.jwtSecret,{expiresIn:"1d"} )
+           const accessToken = jwt.sign({sub:userDetail._id,type:"Bearer"},AppConfig.jwtSecret,{expiresIn:"1d"} )
            // RefresToken
            res.json({
                 data: 
@@ -140,7 +140,10 @@ class AuthController {
     }
 
     getLoggedInUserProfile = (req, res, next) => {
-        res.json({ data: {}, message: "Your profile", status: "OK" })
+        res.json({ 
+            data: req.LoggedInUser,
+            message: "Your profile", 
+            status: "OK" })
     }
 
     forgotPasswordRequest = (req, res, next) => {
@@ -148,7 +151,10 @@ class AuthController {
     }
 
     updateSingleRowByfilter = (req, res, next) => {
-        res.json({ data: {}, message: "User updated successfully", status: "OK" });
+    // get user by id -->id from prams
+    //userSvc.getSingleRowByFilter({_id:req.params.userId})
+    //throw exception if id not found 
+    // if found then update data
     }
 }
 
