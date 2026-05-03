@@ -1,15 +1,23 @@
+const jwt = require("jsonwebtoken");
+const { AppConfig } = require("../config/config");
 // middleware
 const loginCheck = ( allowedRole= null) => {
   return (req, res, next) => {
-     //logic
-   //check if user is logged in or not
-   console.log("Middleware 1")
-   //manipulate req object
-   //respont to user
-   //next function scope
-   // throw an error through error handler
-   next();
+  try {
+    let token = req.headers["authorization"]?? null ;
+    if (!token) throw { code: 401, message: "login Required", status: "TOKEN_NOT_FOUND" }
+    token = token.replace("Bearer ", "");
+    const data = jwt.verify(token, AppConfig.jwtSecret);
+
+
+
+  } catch (exception) {
+   if(exception.name === "JsonWebTokenError" || exception.name === "TokenExpiredError"){
+    return next({code:401,message:"Invalid or Expired Token",status:"INVALID_TOKEN"})
+   }
+   console.log("Exception in auth middleware", exception);
+    
   }
-   // return checkLogin;
+}
 };
 module.exports = { loginCheck } ;
