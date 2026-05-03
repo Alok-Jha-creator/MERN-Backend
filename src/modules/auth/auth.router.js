@@ -17,7 +17,6 @@ authRouter.get("/activate/:token",authCtrl.activateUserByToken)
 authRouter.get("/resend-activation-token/:token",authCtrl.resendActivationToken)
 authRouter.post("/login",validateBodyData(loginDTO),authCtrl.loginUser)
 authRouter.get('/me',loginCheck(),authCtrl.getLoggedInUserProfile)
-authRouter.post('/:userId/edit-user',loginCheck(),authCtrl.updateSingleRowByfilter)
 
 
 authRouter.get("/profile",authCtrl.getLoggedInUserProfile)
@@ -25,6 +24,7 @@ authRouter.get("/profile",authCtrl.getLoggedInUserProfile)
 authRouter.post("/forgot-password",validateBodyData(ForgetPasswordDTO),authCtrl.forgotPasswordRequest)
 // authRouter.post("/verify-token/:token",authCtrl.verifyForgetPassword)
 // authRouter.post("/reset-password/:token",validateBody(passwordresetDTO),authCtrl.resetPassword)
+authRouter.post('/:userId/edit-user',loginCheck(),authCtrl.updateSingleRowByfilter)
 
 /* auth route end */
 module.exports=authRouter;
