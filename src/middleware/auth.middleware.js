@@ -15,7 +15,12 @@ const loginCheck = ( allowedRole= null) => {
    if(exception.name === "JsonWebTokenError" || exception.name === "TokenExpiredError"){
     return next({code:401,message:"Invalid or Expired Token",status:"INVALID_TOKEN"})
    }
-   console.log("Exception in auth middleware", exception);
+   else if(exception instanceof jwt.JsonWebTokenError){
+    exception.code = 401;
+    exception.message = "Invalid Token";
+    exception.status = "INVALID_TOKEN";
+   }
+   next(exception);
     
   }
 }
