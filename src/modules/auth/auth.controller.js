@@ -3,6 +3,7 @@ const authService = require('./auth.service');
 const userService = require('../user/user.service');
 const authMail = require('./auth.mail');
 const { randomStringGenerator, createDate } = require('../../utilities/helpers');
+const e = require('express');
 
 class AuthController {
     registerUser = async (req, res, next) => {
@@ -87,12 +88,26 @@ class AuthController {
                 status: "OK"
             });
         } catch (exception) {
-            next(exception) // ✅ एउटै catch block मा सबै
+            next(exception) 
         }
     };
 
-    loginUser = (req, res, next) => {
-        res.json({ data: {}, message: "login successfully", status: "OK" })
+    loginUser = async (req, res, next) => {
+        try {
+            const { username, password } = req.body;
+            const userDetail= await userService.getSingleRowByFilter({
+                email: username
+            })
+            if(!userDetail) throw { 
+                code: 404,
+                message: "User not found", 
+                status: "USER_NOT_FOUND" 
+            }
+
+
+        } catch (exception) {
+            next(exception)
+        }
     }
 
     getLoggedInUserProfile = (req, res, next) => {

@@ -21,4 +21,9 @@ const RegisterDTO = Joi.object({
     image:Joi.string().allow(null,'').optional().default(null)
 });
 
-module.exports={RegisterDTO}
+const loginDTO = Joi.object({
+    username:Joi.string().email().required(),
+    password:Joi.string().required()
+})
+
+module.exports={RegisterDTO,loginDTO}
