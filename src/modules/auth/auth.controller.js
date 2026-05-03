@@ -175,6 +175,19 @@ class AuthController {
         // success
             //password reset page open with token
     }
+
+    resetPassword = async (req, res, next) => {
+        //token from params
+        //token user get
+        //get single row by filter {forgetPasswordToken:token}
+        //exception throw if not found
+        //check expiry time
+            //expired
+            //throw token expired re-request new one for reset password
+        // success
+            //password update with bcryptjs
+            //forgetPasswordToken and expiryTime null set garne 
+    }
 }
 
 const authCtrl = new AuthController();

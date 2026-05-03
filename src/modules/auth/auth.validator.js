@@ -28,5 +28,12 @@ const loginDTO = Joi.object({
 const ForgetPasswordDTO = Joi.object({
     email:Joi.string().email().required()
 })
+const PasswordResetDTO = Joi.object({
+    password:Joi.string().regex(PasswordExp).required().messages({
+        "string.empty":"Password is required",
+        "string.pattern.base":"Password must be 8-25 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character"
+    }),
+    confirmPassword:Joi.string().valid(Joi.ref('password')).required().messages({'any.only':'Confirm password must match password'}),
+})
 
-module.exports={RegisterDTO,loginDTO,ForgetPasswordDTO}
+module.exports={RegisterDTO,loginDTO,ForgetPasswordDTO,PasswordResetDTO}

@@ -24,6 +24,7 @@ authRouter.get("/profile",authCtrl.getLoggedInUserProfile)
 // add validator for email
 authRouter.post("/forgot-password",validateBodyData(ForgetPasswordDTO),authCtrl.forgotPasswordRequest)
 // authRouter.post("/verify-token/:token",authCtrl.verifyForgetPassword)
+// authRouter.post("/reset-password/:token",validateBody(passwordresetDTO),authCtrl.resetPassword)
 
 /* auth route end */
 module.exports=authRouter;
