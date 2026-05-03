@@ -91,3 +91,7 @@ Route ----> Middlewere/Controller------>Services/Model------->Database Server
 ### DB
     -find all data(entity) that might be used in our project (ecommerce)
       -with each data property
+### Brands
+    -name,slug,logo,status,(id,status,createdBy, createdAt,updatedat,updatedBy)
+### Category
+    -name,image,ststus,slug,brands
