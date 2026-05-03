@@ -98,12 +98,30 @@ class AuthController {
             const userDetail= await userService.getSingleRowByFilter({
                 email: username
             })
+            // if user is not found
             if(!userDetail) throw { 
                 code: 404,
-                message: "User not found", 
-                status: "USER_NOT_FOUND" 
+                message: "User not resistered yet", 
+                status: "USER_NOT_REGISTERED" 
             }
-
+            // if user found
+           if(!bcrypt.compareSync(password,userDetail.password)){
+                throw {
+                    code: 401,
+                    message: "Invalid credentials",
+                    status: "INVALID_CREDENTIALS"
+                }
+           }
+           // password verify
+           if(userDetail.status!==Status.ACTIVE){
+            throw {
+                code: 403,
+                message: "User account is not active yet, please check email activate your account first",
+                status: "USER_ACCOUNT_NOT_ACTIVE"
+            }
+           }
+           // generate token --> jwt(jeson web token)
+                // 3 part- header, payload, signature
 
         } catch (exception) {
             next(exception)
