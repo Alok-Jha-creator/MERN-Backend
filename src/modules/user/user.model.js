@@ -41,6 +41,7 @@ const UserSchema = new mongoose.Schema({
         type:String,
         index:true
     },
+    forgetPasswordToken:String,
     expireTime:Date,
     status:{
         type:String,

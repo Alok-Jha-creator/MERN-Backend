@@ -147,7 +147,14 @@ class AuthController {
     }
 
     forgotPasswordRequest = (req, res, next) => {
-        res.json({ data: {}, message: "password reset successfully", status: "OK" })
+        //validate of data
+        //email resive
+        //get user detail by email
+        //take ref from login 
+        //generate token and expiry time 
+         //const updateData = {forgetPasswordToken: randomStringGenerator(), expireTime: createDate(new Date(), 1)}
+         e.response
+        res.json({ data: {}, message: "An email has been forwarded to regiterd account for password reset", status: "OK" })
     }
 
     updateSingleRowByfilter = (req, res, next) => {
@@ -155,6 +162,18 @@ class AuthController {
     //userSvc.getSingleRowByFilter({_id:req.params.userId})
     //throw exception if id not found 
     // if found then update data
+    }
+
+    verifyForgetPassword = async (req, res, next) => {
+        //token from params
+        //token user get
+        //get single row by filter {forgetPasswordToken:token}
+        //exception throw if not found
+        //check expiry time
+            //expired
+            //throw token expired re-request new one for reset password
+        // success
+            //password reset page open with token
     }
 }
 

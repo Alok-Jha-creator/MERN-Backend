@@ -25,5 +25,8 @@ const loginDTO = Joi.object({
     username:Joi.string().email().required(),
     password:Joi.string().required()
 })
+const ForgetPasswordDTO = Joi.object({
+    email:Joi.string().email().required()
+})
 
-module.exports={RegisterDTO,loginDTO}
+module.exports={RegisterDTO,loginDTO,ForgetPasswordDTO}
