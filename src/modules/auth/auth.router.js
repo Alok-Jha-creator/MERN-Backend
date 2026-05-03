@@ -11,8 +11,9 @@ const uploader = require('../../middleware/uploader.middleware.js');
 
 authRouter.post("/register",uploader().single('image'),validateBodyData(RegisterDTO), authCtrl.registerUser)
 authRouter.get("/activate/:token",authCtrl.activateUserByToken)
-    //resend activation token:TODO
 authRouter.get("/resend-activation-token/:token",authCtrl.resendActivationToken)
+
+
 authRouter.post("/login",authCtrl.loginUser)
 authRouter.get("/profile",authCtrl.getLoggedInUserProfile)
 authRouter.post("/forgot-password",authCtrl.forgotPasswordRequest)
