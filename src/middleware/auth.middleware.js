@@ -18,7 +18,7 @@ const loginCheck = ( allowedRole= null) => {
     if(!userDetail) throw { code: 404, message: "User not resistered or not activated", status: "USER_NOT_REGISTERED_OR_ACTIVATED" }
 
     //req manupulate
-    req.LoggedInUser = userService.getUserPublicProfile(userDetail);
+    req.loggedInUser = userService.getUserPublicProfile(userDetail);
 
     if(
       userDetail.role === userRoles.ADMIN ||

@@ -30,10 +30,21 @@ class BrandService {
               const data = await BrandModel.find(filter)
                  .populate('createdBy',['_id','name','role','email','image','status'])
                  .populate('updatedBy',['_id','name','role','email','image','status'])
+                return data;
           } catch (exception) {
                 throw exception;
           }
-     }
+    }
+   async getSingleRowByFilter(filter){
+    try {
+        const data = await BrandModel.findOne(filter)
+           .populate('createdBy',['_id','name','role','email','image','status'])
+           .populate('updatedBy',['_id','name','role','email','image','status'])
+          return data;
+    } catch (exception) {
+          throw exception;
+    }
+   }
 }
 
 const brandService = new BrandService();
