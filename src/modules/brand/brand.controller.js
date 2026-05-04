@@ -60,10 +60,15 @@ class BrandController{
             const id = req.params.id;
             const brandDetail=await brandService.getSingleRowByFilter({_id:id});
             if(!brandDetail) throw {code:404,message:"Brand not found",status:"BRAND_NOT_FOUND"}
+            res.json({
+                data: brandDetail,
+                message: "brand details",
+                status: "BRAND_DETAIL"
+            })
         } catch (exception) {
-             next(exception)
-            
+             next(exception)          
         }
+
     }
 }
 

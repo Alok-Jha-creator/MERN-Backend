@@ -12,7 +12,7 @@ brandRouter.get("/for-home",brandCtrl.getAllActiveBrands);
  brandRouter.post('/',loginCheck([userRoles.ADMIN,userRoles.SELLER]),uploader().single('logo'),validateBodyData(BrandDataDTO),brandCtrl.addBrand);
  brandRouter.get('/',loginCheck([userRoles.ADMIN,userRoles.SELLER]),brandCtrl.getAllBrands);
  brandRouter.get('/:id',loginCheck([userRoles.ADMIN,userRoles.SELLER]),brandCtrl.getBrandById);
-// brandRouter.put('/:id')
+ brandRouter.put('/:id',loginCheck([userRoles.ADMIN,userRoles.SELLER]),uploader().single('logo'),validateBodyData(BrandDataDTO),brandCtrl.addBrand)
 // brandRouter.delete('/:id')
 
 module.exports = brandRouter;
