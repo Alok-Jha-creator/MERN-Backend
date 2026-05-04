@@ -16,7 +16,7 @@ class BrandService {
          throw exception;        
        }
     }
-    async storeBrand(data){
+   async storeBrand(data){
         try {
             const brand = new BrandModel(data);
             return await brand.save();
@@ -25,6 +25,15 @@ class BrandService {
         }
      
     }
+   async listAllBrandsByFilter(filter){
+          try {
+              const data = await BrandModel.find(filter)
+                 .populate('createdBy',['_id','name','role','email','image','status'])
+                 .populate('updatedBy',['_id','name','role','email','image','status'])
+          } catch (exception) {
+                throw exception;
+          }
+     }
 }
 
 const brandService = new BrandService();

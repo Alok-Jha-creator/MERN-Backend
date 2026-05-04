@@ -1,3 +1,4 @@
+const { userRoles } = require("../../config/constants");
 const { brandService } = require("./brand.service");
 
 class BrandController{
@@ -15,6 +16,22 @@ class BrandController{
             
         }
     }
+
+    async getAllBrands(req, res, next){
+        try {
+           let filter ={};
+           if(req.loggedInUser.role !== userRoles.ADMIN){
+            filter = {
+                ...filter,
+                createdBy: req.loggedInUser._id
+            }
+           }
+        const data = await brandService.listAllBrandsByFilter (filter);
+        } catch (exception) {
+            next(exception)
+            
+        }
+     }
 }
 
 const brandCtrl = new BrandController();
