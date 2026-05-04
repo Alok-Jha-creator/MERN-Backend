@@ -10,13 +10,11 @@ const brandSchema = new mongoose.Schema({
     status:{type:String,enum:Object.values(Status),default:Status.INACTIVE},
     createdBy:{type:mongoose.Types.ObjectId,ref:"User",default:null},
     updatedBy:{type:mongoose.Types.ObjectId,ref:"User",default:null},
-
 },{
     //configuration
     autoCreate:true,
     autoIndex:true,
     timestamps:true
-
 })
 const BrandModel = mongoose.model("Brand",brandSchema);
 module.exports = BrandModel;

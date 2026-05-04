@@ -165,15 +165,16 @@ class AuthController {
     }
 
     verifyForgetPassword = async (req, res, next) => {
-        //token from params
-        //token user get
-        //get single row by filter {forgetPasswordToken:token}
-        //exception throw if not found
-        //check expiry time
-            //expired
-            //throw token expired re-request new one for reset password
-        // success
-            //password reset page open with token
+        try {
+            const token = req.params.token;
+            const userDetail = await userService.getSingleRowByFilter({
+                forgetPasswordToken: token
+            });
+            if(!userDetail) throw { code: 404, message: "Token not found", status: "FORGET_PASSWORD_TOKEN_ERR" }
+        } catch (exception) {
+            next(exception)
+            
+        }
     }
 
     resetPassword = async (req, res, next) => {
