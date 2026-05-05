@@ -28,6 +28,30 @@ class UserService{
                 
             }
     }
+    async getAllRowsByFilter(filter,query){
+        try {
+            const page = +query.page || 1;
+            const limit = +query.limit || 20;
+            const skip = (page - 1) * limit;
+
+            const data =await UserModel.find(filter)
+                .sort({createdAt:'desc'})
+                .skip(skip)
+                .limit(limit)
+            const total = await UserModel.countDocuments(filter);
+            return{
+                data:data.map(user=>this.getUserPublicProfile(user)),
+                pagination:{
+                    total: total,
+                    page: page,
+                    limit: limit    
+                }
+            }
+        } catch (exception) {
+             throw exception
+            
+        }
+    }
 
    getUserPublicProfile(user){
     return {
@@ -47,4 +71,4 @@ class UserService{
    }
 }
 
-module.exports = new UserService()
+module.exports = new UserService();
