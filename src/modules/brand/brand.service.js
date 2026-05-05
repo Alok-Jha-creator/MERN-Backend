@@ -1,21 +1,40 @@
 const slugify = require('slugify');
 const cloudinarySvc = require('../../../services/cloudinary.services');
 const BrandModel = require('./brand.model');
+const { userRoles } = require('../../config/constants');
 
 class BrandService {
    async transformToBrandData(req) {
        try {
         const data = req.body;
-        data.slug = slugify(data.name)
+        data.slug = slugify(data.name,{
+         lower:true,
+        })
         if(req.file){
             data.logo = await cloudinarySvc.singlefileUpload(req.file.path, 'brand');
         }
-        data.createdBy = req.loggedInUser._id;
+        data.createdBy = req.LoggedInUser._id;
         return data;
        } catch (exception) {
          throw exception;        
        }
     }
+    async transformToBrandUpdateData(req,oldBrand){
+        try {
+            const data = req.body;
+            if(req.file){
+                data.logo = await cloudinarySvc.singlefileUpload(req.file.path, 'brand');
+            } else {
+                data.logo = oldBrand.logo;
+            }
+            data.updatedBy = req.LoggedInUser._id;
+            return data;
+           } catch (exception) {
+             throw exception;        
+           }
+    }
+
+
    async storeBrand(data){
         try {
             const brand = new BrandModel(data);
@@ -35,6 +54,27 @@ class BrandService {
                 throw exception;
           }
     }
+
+    async validateBrandDetail(id,loggedInUser){
+        let filter = {
+            _id: id,
+        }
+        if (loggedInUser.role !== userRoles.ADMIN) {
+            filter={
+                ...filter,
+                createdBy: loggedInUser._id
+            }
+        }
+        const brandDetail=await this.getSingleRowByFilter(filter);
+        if(!brandDetail) { throw {
+            code:404,
+            message:"Brand not found",
+            status:"BRAND_NOT_FOUND"
+        };  
+    }
+    return brandDetail;
+ }
+
    async getSingleRowByFilter(filter){
     try {
         const data = await BrandModel.findOne(filter)
@@ -43,6 +83,15 @@ class BrandService {
           return data;
     } catch (exception) {
           throw exception;
+    }
+   }
+
+   async updateBrand(data,filter){
+    try {
+        const updateData = await BrandModel.findOneAndUpdate(filter,{$set:data},{new:true})
+        return updateData;
+    } catch (exception) {
+        throw exception;
     }
    }
 }
