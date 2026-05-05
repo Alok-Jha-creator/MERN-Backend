@@ -94,4 +94,4 @@ Route ----> Middlewere/Controller------>Services/Model------->Database Server
 ### Brands
     -name,slug,logo,status,(id,status,createdBy, createdAt,updatedat,updatedBy)
 ### Category
-    -name,image,ststus,slug,brands
+    -name,slug,parentid,image,brands,(.id,status,created,updatedby,createdAt,updatedAt)

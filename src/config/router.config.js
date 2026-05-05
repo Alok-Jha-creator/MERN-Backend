@@ -15,7 +15,7 @@ router.use("/auth", authRouter);
 router.use("/front", frontRouter);
 // router.use("/banner", bannerRouter);
 router.use("/brand", brandRouter);
-// router.use("/category", categoryRouter);
+router.use("/categories", categoryRouter);
 // router.use("/products", productsRouter);
 // router.use("/transaction", transactionRouter);
 // router.use("/user", userRouter);
