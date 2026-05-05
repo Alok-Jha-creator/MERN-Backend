@@ -12,5 +12,6 @@ const userRouter = require('express').Router();
 //user routers 
 userRouter.post('/',loginCheck([userRoles.ADMIN]),uploader().single('image'),validateBodyData(RegisterDTO),authCtrl.registerUser);
 userRouter.get('/',loginCheck(),UserController.getAllUsers);
+userRouter.delete('/:userId',loginCheck(),UserController.deleteUser);
 
 module.exports = userRouter;

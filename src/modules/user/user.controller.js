@@ -35,6 +35,9 @@ class UserController{
              next(exception)          
         }
     }
+    async deleteUser(req, res, next) {
+        
+    }
 }
 
 
