@@ -4,6 +4,8 @@ const { brandService } = require("./brand.service");
 class BrandController {
     async addBrand(req, res, next) {
         try {
+            console.log("LoggedInUser>>>", req.LoggedInUser); // ← ADD THIS
+        console.log("Headers>>>", req.headers.authorization); // ← ADD THIS
             const data = await brandService.transformToBrandData(req);
             const brand = await brandService.storeBrand(data);
             res.json({
@@ -22,7 +24,7 @@ class BrandController {
             if (req.LoggedInUser.role !== userRoles.ADMIN) {
                 filter = {
                     ...filter,
-                    createdBy: req.LoggedInUser._id
+                    createdBy: req.loggedInUser._id
                 }
             }
             const data = await brandService.listAllBrandsByFilter(filter);

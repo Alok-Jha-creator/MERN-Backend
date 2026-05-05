@@ -13,7 +13,7 @@ class BrandService {
         if(req.file){
             data.logo = await cloudinarySvc.singlefileUpload(req.file.path, 'brand');
         }
-        data.createdBy = req.LoggedInUser._id;
+        data.createdBy = req.loggedInUser._id;
         return data;
        } catch (exception) {
          throw exception;        
@@ -27,7 +27,7 @@ class BrandService {
             } else {
                 data.logo = oldBrand.logo;
             }
-            data.updatedBy = req.LoggedInUser._id;
+            data.updatedBy = req.loggedInUser._id;
             return data;
            } catch (exception) {
              throw exception;        
