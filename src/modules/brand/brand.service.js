@@ -94,6 +94,14 @@ class BrandService {
         throw exception;
     }
    }
+
+   async deleteDataById(id){
+    try {
+        return await BrandModel.findByIdAndDelete(id);
+    } catch (exception) {
+         throw exception;
+    }
+   }
 }
 
 const brandService = new BrandService();

@@ -4,8 +4,6 @@ const { brandService } = require("./brand.service");
 class BrandController {
     async addBrand(req, res, next) {
         try {
-            console.log("LoggedInUser>>>", req.LoggedInUser); // ← ADD THIS
-        console.log("Headers>>>", req.headers.authorization); // ← ADD THIS
             const data = await brandService.transformToBrandData(req);
             const brand = await brandService.storeBrand(data);
             res.json({
@@ -21,7 +19,7 @@ class BrandController {
     async getAllBrands(req, res, next) {
         try {
             let filter = {};
-            if (req.LoggedInUser.role !== userRoles.ADMIN) {
+            if (req.loggedInUser.role !== userRoles.ADMIN) {
                 filter = {
                     ...filter,
                     createdBy: req.loggedInUser._id
@@ -67,8 +65,8 @@ class BrandController {
 
     async updateBrandData(req, res, next) {
         try {
-            console.log("LoggedInUser>>>", req.LoggedInUser) 
-            const brandDetail = await brandService.validateBrandDetail(req.params.id, req.LoggedInUser);
+            
+            const brandDetail = await brandService.validateBrandDetail(req.params.id, req.loggedInUser);
             const updateData = await brandService.transformToBrandUpdateData(req, brandDetail);
             const updated = await brandService.updateBrand(updateData, { _id: brandDetail._id });
             
@@ -76,6 +74,20 @@ class BrandController {
                 data: updated,
                 message: "brand updated successfully",
                 status: "BRAND_UPDATED"
+            })
+        } catch (exception) {
+            next(exception)
+        }
+    }
+
+    async deleteBrandById(req, res, next) {
+        try {
+            const brandDetail = await brandService.validateBrandDetail(req.params.id, req.loggedInUser);
+            const del = await brandService.deleteDataById(brandDetail._id);
+            res.json({
+                data: del,
+                message: "brand deleted successfully",
+                status: "BRAND_DELETED"
             })
         } catch (exception) {
             next(exception)

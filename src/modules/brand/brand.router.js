@@ -13,6 +13,6 @@ brandRouter.get("/for-home",brandCtrl.getAllActiveBrands);
  brandRouter.get('/',loginCheck([userRoles.ADMIN,userRoles.SELLER]),brandCtrl.getAllBrands);
  brandRouter.get('/:id',loginCheck([userRoles.ADMIN,userRoles.SELLER]),brandCtrl.getBrandById);
  brandRouter.put('/:id',loginCheck([userRoles.ADMIN,userRoles.SELLER]),uploader().single('logo'),validateBodyData(BrandDataDTO),brandCtrl.updateBrandData)
-// brandRouter.delete('/:id')
+ brandRouter.delete('/:id',loginCheck([userRoles.ADMIN,userRoles.SELLER]),brandCtrl.deleteBrandById)
 
 module.exports = brandRouter;
