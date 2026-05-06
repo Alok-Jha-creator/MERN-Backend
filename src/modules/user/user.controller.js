@@ -35,8 +35,18 @@ class UserController{
              next(exception)          
         }
     }
-    async deleteUser(req, res, next) {
-        
+    async deleteUserById(req, res, next) {
+        try {
+            const del = await userService.deleteUserById(req.params.id);
+            if(!del) throw { code: 404, message: "User not found", status: "USER_NOT_FOUND" };
+            res.json({
+                data: del,
+                message: "user deleted successfully",
+                status: "USER_DELETED"
+            })
+        } catch (exception) {
+            next(exception)
+        }
     }
 }
 

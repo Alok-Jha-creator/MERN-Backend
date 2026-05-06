@@ -69,6 +69,13 @@ class UserService{
         
     
    }
+   async deleteUserById(id){
+    try {
+        return await UserModel.findByIdAndDelete(id);
+    } catch (exception) {
+        throw exception;
+    }
+}
 }
 
 module.exports = new UserService();
