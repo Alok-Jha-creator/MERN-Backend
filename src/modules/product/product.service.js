@@ -28,8 +28,8 @@ class ProductService {
         // after discount price
         data.afterDiscount = data.price - (data.price * data.discount / 100);
 
-        if(req.files){
-            data.images = await cloudinarySvc.uploadMultipleFiles(req.file, 'product');
+        if(req.files && req.files.length > 0){
+            data.images = await cloudinarySvc.uploadMultipleFiles(req.files, 'product');
         }
        
         data.createdBy = req.loggedInUser._id;
@@ -40,21 +40,29 @@ class ProductService {
     }
 
 
-
-
     async transformToProductUpdateData(req,oldProduct){
         try {
             const data = req.body;
-            if(req.file){
-                data.image = await cloudinarySvc.singlefileUpload(req.file.path, 'product');
+
+            if(req.files && req.files.length > 0){
+                data.images = await cloudinarySvc.uploadMultipleFiles(req.files, 'product');
             } else {
-                data.image = oldProduct.image;
+                data.images = oldProduct.images;
             }
-            if(!data.parent || data.parent === '' || data.parent === 'null') {
-                data.parent = null;
+            if(!data.category || data.category === '' || data.category === 'null') {
+                data.category = null;
             }
-            if(!data.brands || data.brands === '' || data.brands === 'null') {
-                data.brands = null;
+            if(!data.brand || data.brand === '' || data.brand === 'null') {
+                data.brand = null;
+            }
+              //price
+              data.price= data.price * 100; // 1 rs = 100 paisa
+              // after discount price
+              data.afterDiscount = data.price - (data.price * data.discount / 100);
+            data.images= oldProduct.images;
+            if(req.files && req.files.length > 0){
+                data.images = await cloudinarySvc.uploadMultipleFiles(req.files, 'product');
+                data.images = data.images.concat(oldProduct.images);
             }
             data.updatedBy = req.loggedInUser._id;
             return data;
@@ -74,14 +82,28 @@ class ProductService {
         }
      
     }
-   async listAllProductsByFilter(filter){
+   async listAllProductsByFilter(filter,query){
           try {
+              const page = +query.page || 1;
+              const limit = +query.limit || 15;
+              const skip = (page - 1) * limit;
               const data = await ProductModel.find(filter)
-                 .populate('parent',['_id','name','slug','image','status','parent','brands'])
-                 .populate('brands',['_id','name','slug','image','status'])
+                 .populate('category',['_id','name','slug','image','status','parent','brands'])
+                 .populate('brand',['_id','name','slug','image','status'])
                  .populate('createdBy',['_id','name','role','email','image','status'])
+                 .populate('seller',['_id','name','role','email','image','status'])
                  .populate('updatedBy',['_id','name','role','email','image','status'])
-                return data;
+                 .sort({createdAt:'desc'})
+                 .skip(skip)
+                 .limit(limit);
+                const count = await ProductModel.countDocuments(filter);
+
+                return {data,pagination:{
+                    total: count,
+                    page: page,
+                    limit: limit,
+                    totalPages: Math.ceil(count/limit)
+                }};
           } catch (exception) {
                 throw exception;
           }

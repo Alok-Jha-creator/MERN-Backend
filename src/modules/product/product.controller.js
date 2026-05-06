@@ -25,11 +25,28 @@ class ProductController {
                     createdBy: req.loggedInUser._id
                 }
             }
-            const data = await productService.listAllProductsByFilter(filter);
+            if(req.query.search){
+                filter ={
+                    ...filter,
+                    $or:[{
+                    name: new RegExp(req.query.search, 'i'),
+                    description: new RegExp(req.query.search, 'i')
+                    }
+                    ]
+                }
+            }
+            if(req.query.status){
+                filter = {
+                    ...filter,
+                    status: req.query.status
+                }
+            }
+            const {data,pagination} = await productService.listAllProductsByFilter(filter,req.query);
             res.json({
                 data: data,
                 message: "product list",
-                status: "PRODUCT_LIST"
+                status: "PRODUCT_LIST",
+                meta:{pagination}
             })
         } catch (exception) {
             next(exception)
@@ -39,11 +56,12 @@ class ProductController {
     async getAllActiveProducts(req, res, next) {
         try {
             let filter = { status: Status.ACTIVE };
-            const data = await productService.listAllProductsByFilter(filter);
+            const {data,pagination} = await productService.listAllProductsByFilter(filter,req.query);
             res.json({
                 data: data,
                 message: "product list",
-                status: "PRODUCT_LIST"
+                status: "PRODUCT_LIST",
+                meta:{pagination}
             })
         } catch (exception) {
             next(exception)

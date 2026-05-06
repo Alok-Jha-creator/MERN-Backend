@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { Status } = require('../../config/constants');
-const { required } = require('joi');
 
 const ProductSchema = new mongoose.Schema({
     //structure
