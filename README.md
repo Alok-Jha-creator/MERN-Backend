@@ -97,3 +97,5 @@ Route ----> Middlewere/Controller------>Services/Model------->Database Server
     -name,slug,parentid,image,brands,(.id,status,created,updatedby,createdAt,updatedAt)
 ### Product
     -name,slug,description,price,discount, after discount,brands,seller,status,isFeatured,category
+### order
+    -order detail ,transaction
