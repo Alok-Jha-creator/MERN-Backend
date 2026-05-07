@@ -13,11 +13,11 @@ const userRouter = require("../modules/user/user.router");
 /* Routes Start */
 router.use("/auth", authRouter);
 router.use("/front", frontRouter);
-// router.use("/banner", bannerRouter);
 router.use("/brand", brandRouter);
 router.use("/categories", categoryRouter);
- router.use("/product", productRouter);
+router.use("/product", productRouter);
+router.use("/user", userRouter);
 // router.use("/transaction", transactionRouter);
- router.use("/user", userRouter);
+// router.use("/banner", bannerRouter);
 /* Routes End */
 module.exports=router;
