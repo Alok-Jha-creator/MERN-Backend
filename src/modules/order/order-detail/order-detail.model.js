@@ -56,3 +56,6 @@ autoIndex: true,
 autoCreate: true
 }
 );
+
+const OrderDetailModel = mongoose.model('OrderDetail', OrderDetailSchema);
+module.exports = OrderDetailModel; 

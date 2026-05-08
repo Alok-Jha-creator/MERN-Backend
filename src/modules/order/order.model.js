@@ -1,5 +1,6 @@
 // _id, buyer,code,orderDate,subtotal,discunt,tax,service charnge,delivarycharge,total ,status(new,process,delivered,cancelled),paymentStatus(paid,unpaid),paymentMethod(cash,card),items[{product,quantity,price}]
 const mongoose = require('mongoose');
+const OrderDetailModel = require('./order-detail/order-detail.model');
 const OrderSchema = mongoose.Schema({
     buyer: { 
         type: mongoose.Schema.Types.ObjectId, 
@@ -64,10 +65,11 @@ const OrderSchema = mongoose.Schema({
         ref: 'User',
         default: null
     },
-    
+
     timestamps: true,
     autoCreate: true,
     autoIndex: true
 });
 
-module.exports = mongoose.model('Order', OrderSchema);
+const OrderModel = mongoose.model('Order', OrderSchema);
+module.exports = OrderModel;
