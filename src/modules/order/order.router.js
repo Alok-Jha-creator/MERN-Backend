@@ -15,6 +15,8 @@ const CheckOutDTO = Joi.object({
   // cart and order detail
 orderRouter.use('/detail',orderDetailRouter);
  // Order and chekout
-orderRouter.post('/',loginCheck([userRoles.ADMIN,userRoles.CUSTOMER]),validateBodyData(CheckOutDTO),orderController.checkout)
+orderRouter.post('/',loginCheck([userRoles.ADMIN,userRoles.CUSTOMER,userRoles.SELLER]),validateBodyData(CheckOutDTO),orderController.checkout)
+orderRouter.get('/',loginCheck(),orderController.getMyOrders);
+orderRouter.delete('/:id',loginCheck([userRoles.ADMIN,userRoles.CUSTOMER,userRoles.SELLER]),orderController.deleteOrder);
 
 module.exports = orderRouter;
