@@ -14,6 +14,7 @@ const AddToCart = Joi.object({
 })
 // add to card ma ==> productId,quantity
 orderDetailRouter.post('/',loginCheck([userRoles.ADMIN,userRoles.CUSTOMER]),validateBodyData(AddToCart),orderDetailCtrl.addToCart);
+//orderDetailRouter.post('/',loginCheck([userRoles.ADMIN,userRoles.CUSTOMER]),orderDetailCtrl.getAllCart);
 
 
 module.exports = orderDetailRouter;
