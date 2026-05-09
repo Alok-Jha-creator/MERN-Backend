@@ -26,6 +26,11 @@ const OrderDetailSchema = new mongoose.Schema({
         type: Number, 
         required: true
     },
+    seller:{
+        type: mongoose.Types.ObjectId, 
+        ref: 'User', 
+        default: null
+    },
     totalAmt: { 
         type: Number, 
         required: true

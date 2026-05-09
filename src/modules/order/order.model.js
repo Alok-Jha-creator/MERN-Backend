@@ -1,72 +1,73 @@
-// _id, buyer,code,orderDate,subtotal,discunt,tax,service charnge,delivarycharge,total ,status(new,process,delivered,cancelled),paymentStatus(paid,unpaid),paymentMethod(cash,card),items[{product,quantity,price}]
 const mongoose = require('mongoose');
 const OrderDetailModel = require('./order-detail/order-detail.model');
+
 const OrderSchema = mongoose.Schema({
-    buyer: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'User', 
-        required: true 
+    buyer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
-    code: { 
-        type: String, 
-        required: true, 
-        unique: true },
-    detail:[{
-        type:mongoose.Types.ObjectId,
-        ref:'OrderDetail',     // come from orderDetail model
+    code: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    detail: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'OrderDetail',
     }],
-    date: { 
-        type: Date, 
-        default: Date.now 
+    date: {
+        type: Date,
+        default: Date.now
     },
     subtotal: {
-        type: Number, 
-        required: true 
+        type: Number,
+        required: true
     },
-    discounts:{
-        type: Number, 
+    discounts: {
+        type: Number,
         min: 0,
-        default: 0 
+        default: 0
     },
-    tax:{
+    tax: {
         type: Number,
     },
-    serviceCharge:{
-        type: Number, 
+    serviceCharge: {
+        type: Number,
         min: 0,
-        default: 0 
+        default: 0
     },
-    deliveryCharge:{
-        type: Number, 
+    deliveryCharge: {
+        type: Number,
         min: 0,
-        default: 0 
+        default: 0
     },
     total: {
-        type: Number, 
-        required: true 
+        type: Number,
+        required: true
     },
     status: {
-        type: String, 
-        enum: ['new', 'process', 'delivered', 'cancelled'], 
-        default: 'new' 
+        type: String,
+        enum: ['new', 'process', 'delivered', 'cancelled'],
+        default: 'new'
     },
     paymentStatus: {
-        type: Boolean, 
-        enum: ['paid', 'unpaid'], 
-        default: 'unpaid' 
+        type: String,     
+        enum: ['paid', 'unpaid'],
+        default: 'unpaid'
     },
     createdBy: {
-        type: mongoose.Types.ObjectId, 
+        type: mongoose.Types.ObjectId,
         ref: 'User',
         default: null
     },
     updatedBy: {
-        type: mongoose.Types.ObjectId, 
+        type: mongoose.Types.ObjectId,
         ref: 'User',
         default: null
     },
-
-    timestamps: true,
+}, {
+    timestamps: true,       
     autoCreate: true,
     autoIndex: true
 });

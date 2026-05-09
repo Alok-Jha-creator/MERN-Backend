@@ -13,8 +13,8 @@ const AddToCart = Joi.object({
     quantity: Joi.number().min(1).max(10).required(),
 })
 // add to card ma ==> productId,quantity
-orderDetailRouter.post('/',loginCheck([userRoles.ADMIN,userRoles.CUSTOMER]),validateBodyData(AddToCart),orderDetailCtrl.addToCart);
-//orderDetailRouter.post('/',loginCheck([userRoles.ADMIN,userRoles.CUSTOMER]),orderDetailCtrl.getAllCart);
+orderDetailRouter.post('/',loginCheck([userRoles.ADMIN,userRoles.CUSTOMER,userRoles.SELLER]),validateBodyData(AddToCart),orderDetailCtrl.addToCart);
+orderDetailRouter.get('/',loginCheck([userRoles.ADMIN,userRoles.CUSTOMER,,userRoles.SELLER]),orderDetailCtrl.getCartItems);
 
 
 module.exports = orderDetailRouter;
