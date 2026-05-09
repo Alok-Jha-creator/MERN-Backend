@@ -74,6 +74,15 @@ class OrderDetailService {
             
         }
     }
+    async deleteSingleRowByFilter(filter){
+        try {
+            return await OrderDetailModel.findOneAndDelete(filter);
+            
+        } catch (exception) {
+            throw exception
+            
+        }
+    }
 }
 
 module.exports = new OrderDetailService();

@@ -52,7 +52,7 @@ const OrderSchema = mongoose.Schema({
         default: 'new'
     },
     paymentStatus: {
-        type: String,     
+        type: Boolean,     
         enum: ['paid', 'unpaid'],
         default: 'unpaid'
     },

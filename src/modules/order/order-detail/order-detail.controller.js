@@ -29,6 +29,7 @@ class OrderDetailController {
                 let updateBody ={
                 quantity: +existingCart.quantity + +quantity,
                 price: +productDetail.afterDiscount,
+                seller: productDetail.seller || loggedInUser._id,
                 totalAmt: ((+existingCart.quantity + +quantity) * +productDetail.afterDiscount) + +existingCart.deliveryCharge
                 }
                 existingCart = await orderDetailService.updateSingleRowByFilter({_id:existingCart._id},updateBody)
@@ -66,6 +67,55 @@ class OrderDetailController {
                 status:"SUCCESS",
                 meta:{pegination}
             })
+        } catch (exception) {
+            next(exception)
+            
+        }
+    }
+
+    async UpdateOrRemoveFromCart(req,res,next){
+        try {
+            const {product,quantity} = req.body;
+            const loggedInUser =req.loggedInUser;
+            //product Detail
+            const productDetail = await productService.getSingleRowByFilter({
+                _id:product
+            })
+            if(!productDetail){
+                throw { code: 404, message:'Product not found',status:'NOT_FOUND'}
+            }
+            //cart Detail
+            let existingCart = await orderDetailService.getSingleRowByFilter({
+                product:product,
+                buyer:loggedInUser._id,
+                order:{$eq:null},
+                status:'pending'
+            })
+            if(!existingCart){
+                throw { code: 404, message:'Cart item not found',status:'NOT_FOUND'}
+            }
+            if(+quantity === 0 || +existingCart.quantity === +quantity){
+                const response = await orderDetailService.deleteSingleRowByFilter({_id:existingCart._id});
+                res.json({
+                    data:null,
+                    message:"Cart item removed successfully",
+                    status:"SUCCESS"
+                })
+            }else{
+                let updateBody ={
+                    quantity: +existingCart.quantity - +quantity,
+                    price: +productDetail.afterDiscount,
+                    seller: productDetail.seller || loggedInUser._id,
+                    totalAmt: ((+existingCart.quantity - +quantity) * +productDetail.afterDiscount) + +existingCart.deliveryCharge
+                    }
+                    existingCart = await orderDetailService.updateSingleRowByFilter({_id:existingCart._id},updateBody)
+                    res.json({
+                        data:existingCart,
+                        message:"Cart item updated",
+                        status:"SUCCESS"
+                    })
+            }
+              
         } catch (exception) {
             next(exception)
             
