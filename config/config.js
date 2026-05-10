@@ -2,7 +2,7 @@
 const {DbConfig} = require('../src/config/config');
 
 module.exports = {
-    devlopment:{
+    development:{
         url: DbConfig.postgres.url,
         dialect: 'postgres',              // Pgsql ==> postgres, mysql ==> mysql, sqlite ==> sqlite, 
         dialectOptions: {

@@ -13,7 +13,7 @@ const DbConfig = {
         url: process.env.MONGODB_URL,
         dbName: process.env.MONGODB_DB, 
     },
-    postgress: {
+    postgres: {
         url: process.env.PGSQL_URL,
     },
 };
