@@ -2,17 +2,17 @@ const { userRoles } = require('../../config/constants');
 const { loginCheck } = require('../../middleware/auth.middleware');
 const uploader = require('../../middleware/uploader.middleware');
 const { validateBodyData } = require('../../middleware/validator.middleware');
-const { BrandDataDTO } = require('./brand.validator');
-const brandCtrl = require('./brand.controller');
+const { BannerDataDTO } = require('./banner.validator');
+const bannerCtrl = require('./banner.controller');
 
-const brandRouter = require('express').Router();
+const bannerRouter = require('express').Router();
 
-brandRouter.get("/for-home",brandCtrl.getAllActiveBrands);
+bannerRouter.get("/for-home",bannerCtrl.getAllActiveBanners);
 //CRUD
- brandRouter.post('/',loginCheck([userRoles.ADMIN,userRoles.SELLER]),uploader().single('logo'),validateBodyData(BrandDataDTO),brandCtrl.addBrand);
- brandRouter.get('/',loginCheck([userRoles.ADMIN,userRoles.SELLER]),brandCtrl.getAllBrands);
- brandRouter.get('/:id',loginCheck([userRoles.ADMIN,userRoles.SELLER]),brandCtrl.getBrandById);
- brandRouter.put('/:id',loginCheck([userRoles.ADMIN,userRoles.SELLER]),uploader().single('logo'),validateBodyData(BrandDataDTO),brandCtrl.updateBrandData)
- brandRouter.delete('/:id',loginCheck([userRoles.ADMIN,userRoles.SELLER]),brandCtrl.deleteBrandById)
+ bannerRouter.post('/',loginCheck([userRoles.ADMIN]),uploader().single('image'),validateBodyData(BannerDataDTO),bannerCtrl.addBanner);
+ bannerRouter.get('/',loginCheck([userRoles.ADMIN]),bannerCtrl.getAllBanners);
+ bannerRouter.get('/:id',loginCheck([userRoles.ADMIN]),bannerCtrl.getBannerById);
+ bannerRouter.put('/:id',loginCheck([userRoles.ADMIN]),uploader().single('image'),validateBodyData(BannerDataDTO),bannerCtrl.updateBannerData)
+ bannerRouter.delete('/:id',loginCheck([userRoles.ADMIN]),bannerCtrl.deleteBannerById)
 
-module.exports = brandRouter;
+module.exports = bannerRouter;

@@ -1,33 +1,31 @@
-const slugify = require('slugify');
-const cloudinarySvc = require('../../../services/cloudinary.services');
-const BrandModel = require('./banner.model');
-const { userRoles } = require('../../config/constants');
 
-class BrandService {
-   async transformToBrandData(req) {
+const cloudinarySvc = require('../../../services/cloudinary.services');
+const BannerModel = require('./banner.model');
+
+
+class BannerService {
+   async transformToBannerData(req) {
        try {
         const data = req.body;
-        data.slug = slugify(data.name,{
-         lower:true,
-        })
+        
         if(req.file){
-            data.logo = await cloudinarySvc.singlefileUpload(req.file.path, 'brand');
+            data.image = await cloudinarySvc.singlefileUpload(req.file.path, 'banner');
         }
-        data.createdBy = req.loggedInUser._id;
+        // data.createdBy = req.loggedInUser._id;
         return data;
        } catch (exception) {
          throw exception;        
        }
     }
-    async transformToBrandUpdateData(req,oldBrand){
+    async transformToBannerUpdateData(req,oldBanner){
         try {
             const data = req.body;
             if(req.file){
-                data.logo = await cloudinarySvc.singlefileUpload(req.file.path, 'brand');
+                data.image = await cloudinarySvc.singlefileUpload(req.file.path, 'banner');
             } else {
-                data.logo = oldBrand.logo;
+                data.image = oldBanner.image;
             }
-            data.updatedBy = req.loggedInUser._id;
+            // data.updatedBy = req.loggedInUser._id;
             return data;
            } catch (exception) {
              throw exception;        
@@ -35,60 +33,68 @@ class BrandService {
     }
 
 
-   async storeBrand(data){
+   async storeBanner(data){
         try {
-            const brand = new BrandModel(data);
-            return await brand.save();
+           // const banner = new BannerModel(data);
+           // return await banner.save();
+           const banner = await BannerModel.create(data);
+           return banner;
         } catch (exception) {
             throw exception;
         }
      
     }
-   async listAllBrandsByFilter(filter){
+   async listAllBannersByFilter(filter){
           try {
-              const data = await BrandModel.find(filter)
-                 .populate('createdBy',['_id','name','role','email','image','status'])
-                 .populate('updatedBy',['_id','name','role','email','image','status'])
+              const data = await BannerModel.findAll({
+                where: filter,
+                order: [['createdAt', 'DESC']],
+                // limit:limit,
+                // offset:offset,
+                // include:[{association:'createdBy',attributes:['_id','name','role','email','image','status']},{association:'updatedBy',attributes:['_id','name','role','email','image','status']}]
+               
+              })
+                
                 return data;
           } catch (exception) {
                 throw exception;
           }
     }
 
-    async validateBrandDetail(id,loggedInUser){
+    async validateBannerDetail(id){
         let filter = {
             _id: id,
         }
-        if (loggedInUser.role !== userRoles.ADMIN) {
-            filter={
-                ...filter,
-                createdBy: loggedInUser._id
-            }
-        }
-        const brandDetail=await this.getSingleRowByFilter(filter);
-        if(!brandDetail) { throw {
+      
+        const bannerDetail=await this.getSingleRowByFilter(filter);
+        if(!bannerDetail) { throw {
             code:404,
-            message:"Brand not found",
-            status:"BRAND_NOT_FOUND"
+            message:"Banner not found",
+            status:"BANNER_NOT_FOUND"
         };  
     }
-    return brandDetail;
+    return bannerDetail;
  }
 
    async getSingleRowByFilter(filter){
     try {
-        const data = await BrandModel.findOne(filter)
-           .populate('createdBy',['_id','name','role','email','image','status'])
-           .populate('updatedBy',['_id','name','role','email','image','status'])
+        const data = await BannerModel.findOne({
+            where: filter,
+            // include:[{association:'createdBy',attributes:['_id','name','role','email','image','status']},{association:'updatedBy',attributes:['_id','name','role','email','image','status']}]
+        })
+         
           return data;
     } catch (exception) {
           throw exception;
     }
    }
 
-   async updateBrand(data,filter){
+   async updateBanner(data,filter){
     try {
-        const updateData = await BrandModel.findOneAndUpdate(filter,{$set:data},{new:true})
+        const updateData = await BannerModel.update(data,{
+            where: filter,
+            
+        })
         return updateData;
     } catch (exception) {
         throw exception;
@@ -97,12 +103,14 @@ class BrandService {
 
    async deleteDataById(id){
     try {
-        return await BrandModel.findByIdAndDelete(id);
+        return await BannerModel.destroy(filter,{
+            where: filter,
+        });
     } catch (exception) {
          throw exception;
     }
    }
 }
 
-const brandService = new BrandService();
-module.exports = {brandService}
+const bannerService = new BannerService();
+module.exports = {bannerService}

@@ -1,93 +1,88 @@
 const { userRoles, Status } = require("../../config/constants");
-const { brandService } = require("./brand.service");
+const { bannerService } = require("./banner.service");
 
-class BrandController {
-    async addBrand(req, res, next) {
+class BannerController {
+    async addBanner(req, res, next) {
         try {
-            const data = await brandService.transformToBrandData(req);
-            const brand = await brandService.storeBrand(data);
+            const data = await bannerService.transformToBannerData(req);
+            const banner = await bannerService.storeBanner(data);
             res.json({
-                data: brand,
-                message: "brand added successfully",
-                status: "BRAND_ADDED"
+                data: banner,
+                message: "banner added successfully",
+                status: "BANNER_ADDED"
             })
         } catch (exception) {
             next(exception)
         }
     }
 
-    async getAllBrands(req, res, next) {
+    async getAllBanners(req, res, next) {
         try {
             let filter = {};
-            if (req.loggedInUser.role !== userRoles.ADMIN) {
-                filter = {
-                    ...filter,
-                    createdBy: req.loggedInUser._id
-                }
-            }
-            const data = await brandService.listAllBrandsByFilter(filter);
+          
+            const data = await bannerService.listAllBannersByFilter(filter);
             res.json({
                 data: data,
-                message: "brand list",
-                status: "BRAND_LIST"
+                message: "banner list",
+                status: "BANNER_LIST"
             })
         } catch (exception) {
             next(exception)
         }
     }
 
-    async getAllActiveBrands(req, res, next) {
+    async getAllActiveBanners(req, res, next) {
         try {
             let filter = { status: Status.ACTIVE };
-            const data = await brandService.listAllBrandsByFilter(filter);
+            const data = await bannerService.listAllBannersByFilter(filter);
             res.json({
                 data: data,
-                message: "brand list",
-                status: "BRAND_LIST"
+                message: "banner list",
+                status: "BANNER_LIST"
             })
         } catch (exception) {
             next(exception)
         }
     }
 
-    async getBrandById(req, res, next) {
+    async getBannerById(req, res, next) {
         try {
-            const brandDetail = await brandService.validateBrandDetail(req.params.id, req.LoggedInUser);
+            const bannerDetail = await bannerService.validateBannerDetail(req.params.id);
             res.json({
-                data: brandDetail,
-                message: "brand details",
-                status: "BRAND_DETAIL"
+                data: bannerDetail,
+                message: "banner details",
+                status: "BANNER_DETAIL"
             })
         } catch (exception) {
             next(exception)
         }
     }
 
-    async updateBrandData(req, res, next) {
+    async updateBannerData(req, res, next) {
         try {
             
-            const brandDetail = await brandService.validateBrandDetail(req.params.id, req.loggedInUser);
-            const updateData = await brandService.transformToBrandUpdateData(req, brandDetail);
-            const updated = await brandService.updateBrand(updateData, { _id: brandDetail._id });
+            const bannerDetail = await bannerService.validateBannerDetail(req.params.id);
+            const updateData = await bannerService.transformToBannerUpdateData(req, bannerDetail);
+            const updated = await bannerService.updateBanner(updateData, { _id: bannerDetail._id });
             
             res.json({
                 data: updated,
-                message: "brand updated successfully",
-                status: "BRAND_UPDATED"
+                message: "banner updated successfully",
+                status: "BANNER_UPDATED"
             })
         } catch (exception) {
             next(exception)
         }
     }
 
-    async deleteBrandById(req, res, next) {
+    async deleteBannerById(req, res, next) {
         try {
-            const brandDetail = await brandService.validateBrandDetail(req.params.id, req.loggedInUser);
-            const del = await brandService.deleteDataById(brandDetail._id);
+            const bannerDetail = await bannerService.validateBannerDetail(req.params.id, req.loggedInUser);
+            const del = await bannerService.deleteDataById(bannerDetail._id);
             res.json({
                 data: del,
-                message: "brand deleted successfully",
-                status: "BRAND_DELETED"
+                message: "banner deleted successfully",
+                status: "BANNER_DELETED"
             })
         } catch (exception) {
             next(exception)
@@ -95,5 +90,5 @@ class BrandController {
     }
 }
 
-const brandCtrl = new BrandController();
-module.exports = brandCtrl;
+const bannerCtrl = new BannerController();
+module.exports = bannerCtrl;

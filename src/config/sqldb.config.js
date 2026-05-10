@@ -13,3 +13,5 @@ const sequelize = new Sequelize(DbConfig.postgres.url, {
     },
     logging: false, // Disable logging; default: console.log
 })
+
+module.exports = {sequelize}

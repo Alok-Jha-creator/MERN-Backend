@@ -1,20 +1,32 @@
-const mongoose = require('mongoose');
-const { Status } = require('../../config/constants');
-const { create } = require('../user/user.model');
+const { DataTypes } = require("sequelize");
+const { sequelize } = require("../../config/sqldb.config");
 
-const brandSchema = new mongoose.Schema({
-    //structure
-    name:{type:String,required:true,min:3,max:50,unique:true},
-    slug:{type:String,required:true,unique:true},
-    logo:{publicId:String,url:String,thumbUrl:String},
-    status:{type:String,enum:Object.values(Status),default:Status.INACTIVE},
-    createdBy:{type:mongoose.Types.ObjectId,ref:"User",default:null},
-    updatedBy:{type:mongoose.Types.ObjectId,ref:"User",default:null},
-},{
-    //configuration
-    autoCreate:true,
-    autoIndex:true,
-    timestamps:true
+const BannerModel = sequelize.define("banners", {
+    _id: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        unique: true,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4
+    },
+    title: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+    },
+    link: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    status: {
+        type: DataTypes.ENUM("active", "inactive"),
+        defaultValue: "active",
+    },
+    image: {
+        type: DataTypes.JSON,
+        allowNull: true,
+    },
+}, {
+    timestamps: true, // ✅ createdAt/updatedAt automatically handle huncha — manually define nagar!
 })
-const BrandModel = mongoose.model("Brand",brandSchema);
-module.exports = BrandModel;
+
+module.exports = BannerModel;
