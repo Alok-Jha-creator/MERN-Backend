@@ -99,3 +99,11 @@ Route ----> Middlewere/Controller------>Services/Model------->Database Server
     -name,slug,description,price,discount, after discount,brands,seller,status,isFeatured,category
 ### order
     -order detail ,transaction
+
+
+### Sql Db use
+    -host,user,password,dbName
+      -ORM (sequlize,prisma,typeORM)
+    -Create databse
+      -migration (files given by ORM -->Schema) -->Table prepare in our db
+    -Project connect
