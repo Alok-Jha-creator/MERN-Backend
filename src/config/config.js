@@ -13,6 +13,9 @@ const DbConfig = {
         url: process.env.MONGODB_URL,
         dbName: process.env.MONGODB_DB, 
     },
+    postgress: {
+        url: process.env.PGSQL_URL,
+    },
 };
 
 const SmtpConfig = {
