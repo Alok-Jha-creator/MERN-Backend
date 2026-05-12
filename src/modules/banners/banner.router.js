@@ -5,8 +5,9 @@ const { validateBodyData } = require('../../middleware/validator.middleware');
 const { BannerDataDTO } = require('./banner.validator');
 const bannerCtrl = require('./banner.controller');
 
-const bannerRouter = require('express').Router();
 
+
+const bannerRouter = require('express').Router();
 bannerRouter.get("/for-home",bannerCtrl.getAllActiveBanners);
 //CRUD
  bannerRouter.post('/',loginCheck([userRoles.ADMIN]),uploader().single('image'),validateBodyData(BannerDataDTO),bannerCtrl.addBanner);
