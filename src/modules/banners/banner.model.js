@@ -26,7 +26,7 @@ const BannerModel = sequelize.define("banners", {
         allowNull: true,
     },
 }, {
-    timestamps: true, // ✅ createdAt/updatedAt automatically handle huncha — manually define nagar!
+    timestamps: true, 
 })
 
 module.exports = BannerModel;
