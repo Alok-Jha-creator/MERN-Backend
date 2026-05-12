@@ -15,7 +15,6 @@ class ProductController {
             next(exception)
         }
     }
-
     async getAllProducts(req, res, next) {
         try {
             let filter = {};
@@ -52,7 +51,6 @@ class ProductController {
             next(exception)
         }
     }
-
     async getAllActiveProducts(req, res, next) {
         try {
             let filter = { status: Status.ACTIVE };
@@ -67,7 +65,6 @@ class ProductController {
             next(exception)
         }
     }
-
     async getProductById(req, res, next) {
         try {
             const productDetail = await productService.validateProductDetail(req.params.id, req.loggedInUser);
@@ -80,7 +77,6 @@ class ProductController {
             next(exception)
         }
     }
-
     async updateProductData(req, res, next) {
         try {
             
@@ -97,7 +93,6 @@ class ProductController {
             next(exception)
         }
     }
-
     async deleteProductById(req, res, next) {
         try {
             const productDetail = await productService.validateProductDetail(req.params.id, req.loggedInUser);
