@@ -100,7 +100,6 @@ Route ----> Middlewere/Controller------>Services/Model------->Database Server
 ### order
     -order detail ,transaction
 
-
 ### Sql Db use
     -host,user,password,dbName
       -ORM (sequlize,prisma,typeORM)
