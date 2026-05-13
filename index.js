@@ -31,9 +31,9 @@ mongodbInit() // mongodbInit asychronous function, so we use then and catch to h
     try {
         await mongodbInit(); // wait for the mongodb connection to be established before starting the server
         //httpServer.listen(PORT, HOST, (err) => {
-        httpServer.listen(PORT, () => { // Remove HOST parameter to listen on all interfaces
+        httpServer.listen(PORT, (err) => { // Remove HOST parameter to listen on all interfaces
             if (!err) {
-                console.log("server running on port " + PORT + ", host: " + HOST);
+                console.log("server running on port," +  PORT );
                 console.log("press Ctrl + C to disconnect the server");
             }
         });
