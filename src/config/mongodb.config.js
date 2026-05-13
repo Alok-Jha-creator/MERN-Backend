@@ -9,7 +9,7 @@ const mongodbInit = async () => {
             autoIndex: true,
 
         });
-        console.log('Connected to MongoDB successfully');
+        console.log('MongoDB Connected successfully');
     } catch (exception) {
         throw{code:500,message:'Error connecting to MongoDB',status:"MONGODB_CONNECTION_ERROR"}
         
