@@ -11,6 +11,7 @@ const mongodbInit = async () => {
         });
         console.log('MongoDB Connected successfully');
     } catch (exception) {
+        console.error('Error connecting to MongoDB:', exception);
         throw{code:500,message:'Error connecting to MongoDB',status:"MONGODB_CONNECTION_ERROR"}
         
     }

@@ -36,7 +36,7 @@ mongodbInit() // mongodbInit asychronous function, so we use then and catch to h
             }
         });
     } catch (exception) { // Fix: Add 'err' parameter to catch block
-        console.log("Errr in server access...");
+        console.log("Errr in server access...",exception);
         process.exit(1); // Exit the process with a failure code
     }
 })(); 
